@@ -1,0 +1,10 @@
+This directory is used to compile and execute all of the automated tests for
+OpenSSL. For information on how to write new unit/automated tests, see:
+
+  http://wiki.openssl.org/index.php/Unit_Testing
+
+To generate a new unit/automated test stub in an OpenSSL subdirectory, run:
+
+  $ [OpenSSL root dir]/new-test.sh foobar
+
+This will create a new foobar_test.c in the current directory.
