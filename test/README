@@ -1,10 +1,21 @@
 This directory is used to compile and execute all of the automated tests for
-OpenSSL. For information on how to write new unit/automated tests, see:
+OpenSSL. It also contains several utility scripts for making the process of
+writing and running tests and other development tools easier. For information
+on how to write new unit/automated tests, see:
+
+  http://wiki.openssl.org/index.php/How_To_Write_Unit_Tests_For_OpenSSL
+
+For more information on the unit/automated testing effort in general:
 
   http://wiki.openssl.org/index.php/Unit_Testing
 
-To generate a new unit/automated test stub in an OpenSSL subdirectory, run:
+TEST ENVIRONMENT FOR BASH
+-------------------------
+test_env.bash contains a handful of environment variables, aliases, and shell
+functions to make test development somewhat easier when developing using
+the bash shell. To import its contents into your environment:
 
-  $ [OpenSSL root dir]/new-test.sh foobar
+ $ . test_env.bash
 
-This will create a new foobar_test.c in the current directory.
+The header comment for test_env.bash contains detailed documentation on its
+contents.
