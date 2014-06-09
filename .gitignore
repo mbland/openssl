@@ -81,3 +81,7 @@
 lib
 Makefile.save
 *.bak
+
+# Development tool databases
+cscope.out
+tags
