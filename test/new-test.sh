@@ -77,7 +77,6 @@ elif test -f $TEST_FILE; then
   exit 1
 fi
 
-OPENSSL_ROOT_RELATIVE=$(echo $GIT_PREFIX | sed -e 's#/$##' -e 's#[^/]*#..#g')
 NAME=$(echo $1 | tr '-' '_')
 LOWER_NAME=$(echo $NAME | tr '[:upper:]' '[:lower:]')
 UPPER_NAME=$(echo $NAME | tr '[:lower:]' '[:upper:]')
@@ -138,7 +137,7 @@ cat >$TEST_FILE <<EOF
  * ====================================================================
  */
 
-#include "${OPENSSL_ROOT_RELATIVE}/test/testutil.h"
+#include "testutil.h"
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
