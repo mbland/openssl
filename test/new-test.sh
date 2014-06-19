@@ -173,10 +173,6 @@ static int execute(${UPPER_NAME}_TEST_FIXTURE fixture)
 	{
 	int result = 0;
 
-	if (result != 0)
-		{
-		printf("** %s failed **\n--------\n", fixture.test_case_name);
-		}
 	return result;
 	}
 
@@ -186,7 +182,9 @@ static int execute(${UPPER_NAME}_TEST_FIXTURE fixture)
 #define EXECUTE_${UPPER_NAME}_TEST()\\
   EXECUTE_TEST(execute, tear_down)
 
-static int test_${LOWER_NAME}()
+DECLARE_TEST_REGISTRY()
+
+TEST(${LOWER_NAME})
 	{
 	SETUP_${UPPER_NAME}_TEST_FIXTURE();
 	EXECUTE_${UPPER_NAME}_TEST();
@@ -197,17 +195,11 @@ static int test_${LOWER_NAME}()
 
 int main(int argc, char *argv[])
 	{
-	int num_failed;
+	int result = 0;
+	ADD_TEST(${LOWER_NAME});
 
-	num_failed = test_${LOWER_NAME}() +
-		0;
-
-	if (num_failed != 0)
-		{
-		printf("%d test%s failed\n", num_failed, num_failed != 1 ? "s" : "");
-		return EXIT_FAILURE;
-		}
-	return EXIT_SUCCESS;
+	result = RUN_TESTS(argv[0]);
+	return result;
 	}
 
 #else /* OPENSSL_NO_WINDOWS */
