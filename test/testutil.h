@@ -59,6 +59,65 @@
 #ifndef HEADER_TESTUTIL_H
 #define HEADER_TESTUTIL_H
 
+#include <stdlib.h>
+#include <stdio.h>
+
+/* Declares the structures needed to register each test case function.
+ * Should be called before any TEST() definitions.
+ */
+#define DECLARE_TEST_REGISTRY()\
+typedef struct test_info\
+	{\
+	const char* test_case_name;\
+	int (*test_fn)();\
+	} TEST_INFO;\
+\
+static TEST_INFO all_tests[1024];\
+static int num_tests = 0;\
+\
+static void add_test(const char* test_case_name, int (*test_fn)())\
+	{\
+	all_tests[num_tests].test_case_name = test_case_name;\
+	all_tests[num_tests].test_fn = test_fn;\
+	++num_tests;\
+	}\
+\
+static int run_tests(const char* test_prog_name)\
+	{\
+	int num_failed = 0;\
+	int i = 0;\
+\
+	printf("%s: %d test case%s\n", test_prog_name, num_tests,\
+		num_tests == 1 ? "" : "s");\
+	for (i = 0; i != num_tests; ++i)\
+		{\
+		if (all_tests[i].test_fn())\
+			{\
+			printf("** %s failed **\n--------\n",\
+				all_tests[i].test_case_name);\
+			++num_failed;\
+			}\
+		}\
+\
+	if (num_failed != 0)\
+		{\
+		printf("%s: %d test%s failed (out of %d)\n", test_prog_name,\
+			num_failed, num_failed != 1 ? "s" : "", num_tests);\
+		return EXIT_FAILURE;\
+		}\
+	printf("  All tests passed.\n");\
+	return EXIT_SUCCESS;\
+	}
+
+/* Defines a test case function.
+ * Ideally we could use this to statically register test functions; that isn't
+ * possible in C, but if we move to C++ (and possibly a framework like Google
+ * Test), this should make the transition easier. Plus the test names become
+ * more greppable.
+ */
+#define TEST(name)\
+static int name()
+
 /* SETUP_TEST_FIXTURE and EXECUTE_TEST macros for test case functions.
  *
  * SETUP_TEST_FIXTURE will call set_up() to create a new TEST_FIXTURE_TYPE
@@ -82,7 +141,7 @@
  *
  * Then test case functions can take the form:
  *
- * static int test_foobar_feature()
+ * TEST(foobar_feature)
  * 	{
  * 	SETUP_FOOBAR_TEST_FIXTURE();
  *	[...set individual members of fixture...]
@@ -112,5 +171,12 @@
 #else
 #define TEST_CASE_NAME __func__
 #endif /* __STDC_VERSION__ */
+
+/* In main(), call ADD_TEST to register each test case function, then call
+ * RUN_TESTS() to execute all tests and report the results. The result
+ * returned from RUN_TESTS() should be used as the return value for main().
+ */
+#define ADD_TEST(name) add_test(#name, name)
+#define RUN_TESTS(test_prog_name) run_tests(test_prog_name)
 
 #endif /* HEADER_TESTUTIL_H */
