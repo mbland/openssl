@@ -87,3 +87,6 @@ TAGS
 
 # Development tool databases
 cscope.out
+
+# Dependency makefiles
+*.d
