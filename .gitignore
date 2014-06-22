@@ -85,3 +85,6 @@ Makefile.save
 # Development tool databases
 cscope.out
 tags
+
+# Dependency makefiles
+*.d
