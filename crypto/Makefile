@@ -147,13 +147,12 @@ dclean:
 	rm -f opensslconf.h
 	@target=dclean; $(RECURSIVE_MAKE)
 
-include $(TOP)/common.mk
-
 cversion.d: cversion.c
 	@test -f buildinf.h || touch buildinf.h # fake buildinf.h if it does not exist
 	$(MAKEDEP_CMD)
 	@test -s buildinf.h || rm buildinf.h
 
--include $(patsubst %.c,%.d,$(LIBSRC))
+include $(TOP)/common.mk
+-include $(patsubst %.c,%.d,$(SRC))
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
