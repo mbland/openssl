@@ -7,3 +7,5 @@ MAKEDEP_CMD=\
 
 %.d: %.c
 	$(MAKEDEP_CMD)
+
+fips%.d: CFLAGS += -DOPENSSL_FIPS
