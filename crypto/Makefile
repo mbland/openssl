@@ -147,19 +147,12 @@ dclean:
 	rm -f opensslconf.h
 	@target=dclean; $(RECURSIVE_MAKE)
 
-MAKEDEP_CMD=\
-	@set -e; rm -f $@; \
-	$(CC) -MM -DOPENSSL_DOING_MAKEDEPEND $(CFLAGS) $< > $@.$$$$; \
-	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
-	rm -f $@.$$$$
+include $(TOP)/common.mk
 
 cversion.d: cversion.c
 	@test -f buildinf.h || touch buildinf.h # fake buildinf.h if it does not exist
 	$(MAKEDEP_CMD)
 	@test -s buildinf.h || rm buildinf.h
-
-%.d: %.c
-	$(MAKEDEP_CMD)
 
 -include $(patsubst %.c,%.d,$(LIBSRC))
 
