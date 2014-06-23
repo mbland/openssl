@@ -78,6 +78,11 @@ LIBKRB5=
 ZLIB_INCLUDE=
 LIBZLIB=
 
+# MAKEOVERRIDES= effectively "equalizes" GNU-ish and SysV-ish make flavors,
+# which in turn eliminates ambiguities in variable treatment with -e.
+MAKEOVERRIDES=
+MAKEFILE=Makefile
+
 # This is the location of fipscanister.o and friends.
 # The FIPS module build will place it $(INSTALLTOP)/lib
 # but since $(INSTALLTOP) can only take the default value
