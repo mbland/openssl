@@ -1,0 +1,93 @@
+### Generated automatically from Makefile.org by Configure.
+
+MAJOR=
+MINOR=
+SHLIB_VERSION_NUMBER=
+SHLIB_VERSION_HISTORY=
+SHLIB_MAJOR=
+SHLIB_MINOR=
+SHLIB_EXT=
+PLATFORM=dist
+OPTIONS=
+CONFIGURE_ARGS=
+SHLIB_TARGET=
+
+# Do not edit this manually. Use Configure --openssldir=DIR do change this!
+OPENSSLDIR=/usr/local/ssl
+
+CC= cc
+CFLAG= -O
+DEPFLAG=
+PEX_LIBS=
+EX_LIBS= 
+EXE_EXT= 
+ARFLAGS= 
+AR= ar $(ARFLAGS) r
+RANLIB= ranlib
+NM= nm
+PERL= perl
+TAR= tar
+TARFLAGS= --no-recursion
+MAKEDEPPROG= makedepend
+LIBDIR=lib
+
+# We let the C compiler driver to take care of .s files. This is done in
+# order to be excused from maintaining a separate set of architecture
+# dependent assembler flags. E.g. if you throw -mcpu=ultrasparc at SPARC
+# gcc, then the driver will automatically translate it to -xarch=v8plus
+# and pass it down to assembler.
+#AS=$(CC) -c
+ASFLAG=$(CFLAG)
+
+# For x86 assembler: Set PROCESSOR to 386 if you want to support
+# the 80386.
+PROCESSOR= 
+
+# CPUID module collects small commonly used assembler snippets
+CPUID_OBJ=
+BN_ASM= bn_asm.o
+DES_ENC= des_enc.o fcrypt_b.o
+AES_ENC= aes_core.o aes_cbc.o
+BF_ENC= bf_enc.o
+CAST_ENC= c_enc.o
+RC4_ENC= rc4_enc.o
+RC5_ENC= rc5_enc.o
+MD5_ASM_OBJ= 
+SHA1_ASM_OBJ= 
+RMD160_ASM_OBJ= 
+WP_ASM_OBJ=
+CMLL_ENC=
+MODES_ASM_OBJ=
+ENGINES_ASM_OBJ=
+PERLASM_SCHEME=
+
+# KRB5 stuff
+KRB5_INCLUDES=
+LIBKRB5=
+
+# Zlib stuff
+ZLIB_INCLUDE=
+LIBZLIB=
+
+# This is the location of fipscanister.o and friends.
+# The FIPS module build will place it $(INSTALLTOP)/lib
+# but since $(INSTALLTOP) can only take the default value
+# when the module is built it will be in /usr/local/ssl/lib
+# $(INSTALLTOP) for this build may be different so hard
+# code the path.
+
+FIPSLIBDIR=/usr/local/ssl/$(LIBDIR)/
+
+# This is set to "y" if fipscanister.o is compiled internally as
+# opposed to coming from an external validated location.
+
+FIPSCANISTERINTERNAL=n
+
+# The location of the library which contains fipscanister.o
+# normally it will be libcrypto unless fipsdso is set in which
+# case it will be libfips. If not compiling in FIPS mode at all
+# this is empty making it a useful test for a FIPS compile.
+
+FIPSCANLIB=
+
+
