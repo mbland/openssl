@@ -107,7 +107,6 @@ foreach $makefile (@makefiles)
 	{
 	next if ! -e "$dir/$makefile";
 	open (IN, "$dir/$makefile") || die "Can't open $dir/$makefile";
-  print STDERR "Processing $dir/$makefile\n";
 
 	my $s="";
 
