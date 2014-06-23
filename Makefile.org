@@ -86,22 +86,6 @@ all: Makefile build_all openssl.pc libssl.pc libcrypto.pc
 include configure.mk
 include build.mk
 
-# as we stick to -e, CLEARENV ensures that local variables in lower
-# Makefiles remain local and variable. $${VAR+VAR} is tribute to Korn
-# shell, which [annoyingly enough] terminates unset with error if VAR
-# is not present:-( TOP= && unset TOP is tribute to HP-UX /bin/sh,
-# which terminates unset with error if no variable was present:-(
-CLEARENV=	TOP= && unset TOP $${LIB+LIB} $${LIBS+LIBS}	\
-		$${INCLUDE+INCLUDE} $${INCLUDES+INCLUDES}	\
-		$${DIR+DIR} $${DIRS+DIRS} $${SRC+SRC}		\
-		$${LIBSRC+LIBSRC} $${LIBOBJ+LIBOBJ} $${ALL+ALL}	\
-		$${EXHEADER+EXHEADER} $${HEADER+HEADER}		\
-		$${GENERAL+GENERAL} $${CFLAGS+CFLAGS}		\
-		$${ASFLAGS+ASFLAGS} $${AFLAGS+AFLAGS}		\
-		$${LDCMD+LDCMD} $${LDFLAGS+LDFLAGS} $${SCRIPTS+SCRIPTS}	\
-		$${SHAREDCMD+SHAREDCMD} $${SHAREDFLAGS+SHAREDFLAGS}	\
-		$${SHARED_LIB+SHARED_LIB} $${LIBEXTRAS+LIBEXTRAS}
-
 BUILDENV=	PLATFORM='$(PLATFORM)' PROCESSOR='$(PROCESSOR)' \
 		CC='$(CC)' CFLAG='$(CFLAG)' 			\
 		ASFLAG='$(CFLAG) -c'			\
@@ -156,7 +140,7 @@ BUILDENV=	PLATFORM='$(PLATFORM)' PROCESSOR='$(PROCESSOR)' \
 # is given through the shell variable `target'.
 BUILD_CMD=  if [ -d "$$dir" ]; then \
 	    (	cd $$dir && echo "making $$target in $$dir..." && \
-		$(CLEARENV) && $(MAKE) -e $(BUILDENV) TOP=.. DIR=$$dir $$target \
+		$(MAKE) -e $(BUILDENV) TOP=.. DIR=$$dir $$target \
 	    ) || exit 1; \
 	    fi
 RECURSIVE_BUILD_CMD=for dir in $(DIRS); do $(BUILD_CMD); done
@@ -166,7 +150,7 @@ BUILD_ONE_CMD=\
 	fi
 
 reflect:
-	@[ -n "$(THIS)" ] && $(CLEARENV) && $(MAKE) $(THIS) -e $(BUILDENV)
+	@[ -n "$(THIS)" ] && $(MAKE) $(THIS) -e $(BUILDENV)
 
 FIPS_EX_OBJ= ../crypto/aes/aes_cfb.o \
 	../crypto/aes/aes_ecb.o \
@@ -337,7 +321,7 @@ do_$(SHLIB_TARGET):
 		if [ "$$i" = "ssl" -a -n "$(LIBKRB5)" ]; then \
 			libs="$(LIBKRB5) $$libs"; \
 		fi; \
-		$(CLEARENV) && $(MAKE) -f Makefile.shared -e $(BUILDENV) \
+		$(MAKE) -f Makefile.shared -e $(BUILDENV) \
 			LIBNAME=$$i LIBVERSION=$(SHLIB_MAJOR).$(SHLIB_MINOR) \
 			LIBCOMPATVERSIONS=";$(SHLIB_VERSION_HISTORY)" \
 			LIBDEPS="$$libs $(EX_LIBS)" \
@@ -422,7 +406,7 @@ links:
 
 gentests:
 	@(cd test && echo "generating dummy tests (if needed)..." && \
-	$(CLEARENV) && $(MAKE) -e $(BUILDENV) TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on generate );
+	$(MAKE) -e $(BUILDENV) TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on generate );
 
 dclean:
 	rm -rf *.bak include/openssl certs/.0
@@ -443,7 +427,7 @@ test:   tests
 
 tests: rehash
 	@(cd test && echo "testing..." && \
-	$(CLEARENV) && $(MAKE) -e $(BUILDENV) TOP=.. TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on OPENSSL_CONF=../apps/openssl.cnf tests );
+	$(MAKE) -e $(BUILDENV) TOP=.. TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on OPENSSL_CONF=../apps/openssl.cnf tests );
 	OPENSSL_CONF=apps/openssl.cnf util/opensslwrap.sh version -a
 
 report:
