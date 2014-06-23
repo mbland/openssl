@@ -1039,7 +1039,8 @@ if ($fips)
 
 $rules.=&do_link_rule("\$(BIN_D)$o\$(E_EXE)$exep","\$(E_OBJ)","\$(LIBS_DEP)","\$(L_LIBS) \$(EX_LIBS)", ($fips && !$shlib) ? 2 : 0);
 
-$rules .= get_tests('test/Makefile') if $orig_platform eq 'copy';
+$tests_makefile = -e 'test/build.mk' ? 'test/build.mk' : 'test/Makefile';
+$rules .= get_tests($tests_makefile) if $orig_platform eq 'copy';
 
 print $defs;
 
