@@ -101,7 +101,7 @@ sub files_dir
 my ($dir) = @_;
 
 my %sym;
-my @makefiles = ("configure.mk", "build.mk", "Makefile");
+my @makefiles = ("configure.mk", "Makefile", "build.mk");
 
 foreach $makefile (@makefiles)
 	{
@@ -141,6 +141,11 @@ foreach $makefile (@makefiles)
 			$sym{$s}=($top{$s} or $o);
 			}
 		}
+
+	if ($dir eq "." && $makefile eq "configure.mk")
+		{
+			@top{ keys %sym } = @sym{ keys %sym };
+		}
 	}
 
 print "RELATIVE_DIRECTORY=$dir\n";
@@ -148,14 +153,6 @@ print "RELATIVE_DIRECTORY=$dir\n";
 foreach (sort keys %sym)
 	{
 	print "$_=$sym{$_}\n";
-	}
-if ($dir eq "." && defined($sym{"BUILDENV"}))
-	{
-	foreach (split(' ',$sym{"BUILDENV"}))
-		{
-		/^(.+)=/;
-		$top{$1}=$sym{$1};
-		}
 	}
 
 print "RELATIVE_DIRECTORY=\n";
