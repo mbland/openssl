@@ -91,52 +91,56 @@ my $fipscanisteronly = 0;
 
 foreach (@dirs) {
 	next if ($fipscanisteronly && !(-d $_));
-	&files_dir ($_, "Makefile");
+	&files_dir ($_);
 }
 
 exit(0);
 
 sub files_dir
 {
-my ($dir, $makefile) = @_;
+my ($dir) = @_;
 
 my %sym;
+my @makefiles = ("configure.mk", "build.mk", "Makefile");
 
-if (-e "$dir/build.mk") { $makefile = "build.mk"; }
-
-open (IN, "$dir/$makefile") || die "Can't open $dir/$makefile";
-
-my $s="";
-
-while (<IN>)
+foreach $makefile (@makefiles)
 	{
-	chop;
-	s/#.*//;
-	if (/^([^\s=]+)\s*=\s*(.*)$/)
-		{
-		$o="";
-		($s,$b)=($1,$2);
-		for (;;)
-			{
-			if ($b =~ /\\$/)
-				{
-				chop($b);
-				$o.=$b." ";
-				$b=<IN>;
-				chop($b);
-				}
-			else
-				{
-				$o.=$b." ";
-				last;
-				}
-			}
-		$o =~ s/^\s+//;
-		$o =~ s/\s+$//;
-		$o =~ s/\s+/ /g;
+	next if ! -e "$dir/$makefile";
+	open (IN, "$dir/$makefile") || die "Can't open $dir/$makefile";
+  print STDERR "Processing $dir/$makefile\n";
 
-		$o =~ s/\$[({]([^)}]+)[)}]/$top{$1} or $sym{$1}/ge;
-		$sym{$s}=($top{$s} or $o);
+	my $s="";
+
+	while (<IN>)
+		{
+		chop;
+		s/#.*//;
+		if (/^([^\s=]+)\s*=\s*(.*)$/)
+			{
+			$o="";
+			($s,$b)=($1,$2);
+			for (;;)
+				{
+				if ($b =~ /\\$/)
+					{
+					chop($b);
+					$o.=$b." ";
+					$b=<IN>;
+					chop($b);
+					}
+				else
+					{
+					$o.=$b." ";
+					last;
+					}
+				}
+			$o =~ s/^\s+//;
+			$o =~ s/\s+$//;
+			$o =~ s/\s+/ /g;
+
+			$o =~ s/\$[({]([^)}]+)[)}]/$top{$1} or $sym{$1}/ge;
+			$sym{$s}=($top{$s} or $o);
+			}
 		}
 	}
 
