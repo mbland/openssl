@@ -34,7 +34,7 @@ install:
 	done;
 
 files:
-	$(PERL) $(TOP)/util/files.pl Makefile >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
 
 links:
 
