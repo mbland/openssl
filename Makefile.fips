@@ -52,18 +52,6 @@ FIPSCANISTERONLY=y
 
 BASEADDR=
 
-DIRS=   crypto fips test 
-ENGDIRS= ccgost
-SHLIBDIRS= crypto 
-
-# dirs in crypto to build
-SDIRS=  \
-	sha hmac des aes modes \
-	bn ec rsa dsa ecdsa dh \
-	buffer evp ecdh cmac
-# keep in mind that the above list is adjusted by ./Configure
-# according to no-xxx arguments...
-
 LINKDIRS=  \
 	objects sha hmac des aes modes \
 	bn ec rsa dsa ecdh cmac ecdsa dh engine \
