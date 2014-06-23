@@ -66,6 +66,8 @@ LIBCOMPATVERSIONS=
 # dependencies to other libraries.
 LIBDEPS=
 
+include $(TOP)/configure.mk
+
 #------------------------------------------------------------------------------
 # The rest is private to this makefile.
 
