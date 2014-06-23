@@ -40,7 +40,7 @@ bf-586.s:	asm/bf-586.pl ../perlasm/x86asm.pl ../perlasm/cbc.pl
 	$(PERL) asm/bf-586.pl $(PERLASM_SCHEME) $(CFLAGS) $(PROCESSOR) > $@
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

@@ -84,7 +84,7 @@ subdirs:
 	@target=all; $(RECURSIVE_MAKE)
 
 files:
-	$(PERL) $(TOP)/util/files.pl "CPUID_OBJ=$(CPUID_OBJ)" build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 	@target=files; $(RECURSIVE_MAKE)
 
 links:

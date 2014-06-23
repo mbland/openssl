@@ -45,7 +45,7 @@ wp-x86_64.s: asm/wp-x86_64.pl
 $(LIBOBJ): $(LIBSRC)
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

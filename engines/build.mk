@@ -92,7 +92,7 @@ subdirs:
 	@target=all; $(RECURSIVE_MAKE)
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 	@target=files; $(RECURSIVE_MAKE)
 
 links:

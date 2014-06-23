@@ -46,7 +46,7 @@ cmllt4-sparcv9.s: asm/cmllt4-sparcv9.pl
 	$(PERL) asm/cmllt4-sparcv9.pl $(CFLAGS) > $@
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

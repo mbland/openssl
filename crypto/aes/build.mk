@@ -93,7 +93,7 @@ bsaes-%.S:	asm/bsaes-%.pl;	$(PERL) $< $(PERLASM_SCHEME) $@
 bsaes-armv7.o:	bsaes-armv7.S
 
 files:
-	$(PERL) $(TOP)/util/files.pl "AES_ENC=$(AES_ENC)" build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

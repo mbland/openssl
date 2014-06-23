@@ -45,7 +45,7 @@ obj_xref.h: objxref.pl obj_xref.txt obj_mac.num
 	@sleep 1; touch obj_xref.h; sleep 1
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

@@ -41,7 +41,7 @@ rmd-586.s:	asm/rmd-586.pl ../perlasm/x86asm.pl
 	$(PERL) asm/rmd-586.pl $(PERLASM_SCHEME) $(CFLAGS) > $@
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

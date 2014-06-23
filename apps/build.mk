@@ -84,7 +84,7 @@ sreq.o: req.c
 	$(CC) -c $(INCLUDES) $(CFLAG) -o sreq.o req.c
 
 files:
-	$(PERL) $(TOP)/util/files.pl build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
 
 install:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
