@@ -3,15 +3,10 @@
 #
 
 DIR=	cast
-TOP=	../..
-CC=	cc
 CPP=	$(CC) -E
 INCLUDES=
-CFLAG=-g
 MAKEFILE=	Makefile
-AR=		ar r
 
-CAST_ENC=c_enc.o
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)

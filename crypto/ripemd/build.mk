@@ -3,13 +3,9 @@
 #
 
 DIR=    ripemd
-TOP=    ../..
-CC=     cc
 CPP=    $(CC) -E
 INCLUDES=
-CFLAG=-g
 MAKEFILE=       Makefile
-AR=             ar r
 
 RIP_ASM_OBJ=
 

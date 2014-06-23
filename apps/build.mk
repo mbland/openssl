@@ -3,22 +3,12 @@
 #
 
 DIR=		apps
-TOP=		..
-CC=		cc
 INCLUDES=	-I$(TOP) -I../include $(KRB5_INCLUDES)
-CFLAG=		-g -static
 MAKEFILE=	Makefile
-PERL=		perl
 RM=		rm -f
 # KRB5 stuff
-KRB5_INCLUDES=
-LIBKRB5=
 
-PEX_LIBS=
-EX_LIBS= 
-EXE_EXT= 
 
-SHLIB_TARGET=
 
 CFLAGS= -DMONOLITH $(INCLUDES) $(CFLAG)
 
