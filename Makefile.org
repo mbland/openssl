@@ -78,45 +78,6 @@ all: Makefile build_all openssl.pc libssl.pc libcrypto.pc
 include configure.mk
 include build.mk
 
-BUILDENV=	PLATFORM='$(PLATFORM)' PROCESSOR='$(PROCESSOR)' \
-		CC='$(CC)' CFLAG='$(CFLAG)' 			\
-		ASFLAG='$(CFLAG) -c'			\
-		AR='$(AR)' NM='$(NM)' RANLIB='$(RANLIB)'	\
-		CROSS_COMPILE='$(CROSS_COMPILE)'	\
-		PERL='$(PERL)' ENGDIRS='$(ENGDIRS)'		\
-		SDIRS='$(SDIRS)' LIBRPATH='$(INSTALLTOP)/$(LIBDIR)'	\
-		INSTALL_PREFIX='$(INSTALL_PREFIX)'		\
-		INSTALLTOP='$(INSTALLTOP)' OPENSSLDIR='$(OPENSSLDIR)'	\
-		LIBDIR='$(LIBDIR)'				\
-		MAKEDEPEND='$$$${TOP}/util/domd $$$${TOP} -MD $(MAKEDEPPROG)' \
-		DEPFLAG='-DOPENSSL_NO_DEPRECATED $(DEPFLAG)'	\
-		MAKEDEPPROG='$(MAKEDEPPROG)'			\
-		SHARED_LDFLAGS='$(SHARED_LDFLAGS)'		\
-		KRB5_INCLUDES='$(KRB5_INCLUDES)' LIBKRB5='$(LIBKRB5)'	\
-		ZLIB_INCLUDE='$(ZLIB_INCLUDE)' LIBZLIB='$(LIBZLIB)'	\
-		EXE_EXT='$(EXE_EXT)' SHARED_LIBS='$(SHARED_LIBS)'	\
-		SHLIB_EXT='$(SHLIB_EXT)' SHLIB_TARGET='$(SHLIB_TARGET)'	\
-		PEX_LIBS='$(PEX_LIBS)' EX_LIBS='$(EX_LIBS)'	\
-		CPUID_OBJ='$(CPUID_OBJ)'			\
-		BN_ASM='$(BN_ASM)' DES_ENC='$(DES_ENC)' 	\
-		AES_ENC='$(AES_ENC)' CMLL_ENC='$(CMLL_ENC)'	\
-		BF_ENC='$(BF_ENC)' CAST_ENC='$(CAST_ENC)'	\
-		RC4_ENC='$(RC4_ENC)' RC5_ENC='$(RC5_ENC)'	\
-		SHA1_ASM_OBJ='$(SHA1_ASM_OBJ)'			\
-		MD5_ASM_OBJ='$(MD5_ASM_OBJ)'			\
-		RMD160_ASM_OBJ='$(RMD160_ASM_OBJ)'		\
-		WP_ASM_OBJ='$(WP_ASM_OBJ)'			\
-		MODES_ASM_OBJ='$(MODES_ASM_OBJ)'		\
-		ENGINES_ASM_OBJ='$(ENGINES_ASM_OBJ)'		\
-		PERLASM_SCHEME='$(PERLASM_SCHEME)'		\
-		FIPSLIBDIR='${FIPSLIBDIR}'			\
-		FIPSCANLIB="$${FIPSCANLIB:-$(FIPSCANLIB)}"	\
-		FIPSCANISTERINTERNAL='${FIPSCANISTERINTERNAL}'	\
-		FIPS_EX_OBJ='${FIPS_EX_OBJ}'	\
-		THIS=$${THIS:-$@} MAKEFILE=Makefile MAKEOVERRIDES=
-# MAKEOVERRIDES= effectively "equalizes" GNU-ish and SysV-ish make flavors,
-# which in turn eliminates ambiguities in variable treatment with -e.
-
 # BUILD_CMD is a generic macro to build a given target in a given
 # subdirectory.  The target must be given through the shell variable
 # `target' and the subdirectory to build in must be given through `dir'.
@@ -132,7 +93,7 @@ BUILDENV=	PLATFORM='$(PLATFORM)' PROCESSOR='$(PROCESSOR)' \
 # is given through the shell variable `target'.
 BUILD_CMD=  if [ -d "$$dir" ]; then \
 	    (	cd $$dir && echo "making $$target in $$dir..." && \
-		$(MAKE) -e $(BUILDENV) TOP=.. DIR=$$dir $$target \
+		$(MAKE) TOP=.. DIR=$$dir $$target \
 	    ) || exit 1; \
 	    fi
 RECURSIVE_BUILD_CMD=for dir in $(DIRS); do $(BUILD_CMD); done
@@ -142,7 +103,7 @@ BUILD_ONE_CMD=\
 	fi
 
 reflect:
-	@[ -n "$(THIS)" ] && $(MAKE) $(THIS) -e $(BUILDENV)
+	@[ -n "$(THIS)" ] && $(MAKE) $(THIS)
 
 sub_all: build_all
 build_all: build_libs build_apps build_tests build_tools
@@ -216,7 +177,7 @@ clean-shared:
 
 link-shared:
 	@ set -e; for i in $(SHLIBDIRS); do \
-		$(MAKE) -f $(HERE)/Makefile.shared -e $(BUILDENV) \
+		$(MAKE) -f $(HERE)/Makefile.shared \
 			LIBNAME=$$i LIBVERSION=$(SHLIB_MAJOR).$(SHLIB_MINOR) \
 			LIBCOMPATVERSIONS=";$(SHLIB_VERSION_HISTORY)" \
 			symlink.$(SHLIB_TARGET); \
@@ -230,7 +191,7 @@ do_$(SHLIB_TARGET):
 		if [ "$$i" = "ssl" -a -n "$(LIBKRB5)" ]; then \
 			libs="$(LIBKRB5) $$libs"; \
 		fi; \
-		$(MAKE) -f Makefile.shared -e $(BUILDENV) \
+		$(MAKE) -f Makefile.shared \
 			LIBNAME=$$i LIBVERSION=$(SHLIB_MAJOR).$(SHLIB_MINOR) \
 			LIBCOMPATVERSIONS=";$(SHLIB_VERSION_HISTORY)" \
 			LIBDEPS="$$libs $(EX_LIBS)" \
@@ -315,7 +276,7 @@ links:
 
 gentests:
 	@(cd test && echo "generating dummy tests (if needed)..." && \
-	$(MAKE) -e $(BUILDENV) TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on generate );
+	$(MAKE) TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on generate );
 
 dclean:
 	rm -rf *.bak include/openssl certs/.0
@@ -336,7 +297,7 @@ test:   tests
 
 tests: rehash
 	@(cd test && echo "testing..." && \
-	$(MAKE) -e $(BUILDENV) TOP=.. TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on OPENSSL_CONF=../apps/openssl.cnf tests );
+	$(MAKE) TOP=.. TESTS='$(TESTS)' OPENSSL_DEBUG_MEMORY=on OPENSSL_CONF=../apps/openssl.cnf tests );
 	OPENSSL_CONF=apps/openssl.cnf util/opensslwrap.sh version -a
 
 report:
@@ -419,7 +380,7 @@ dist:
 	@$(MAKE) TAR='$(TAR)' TARFLAGS='$(TARFLAGS)' tar
 
 dist_pem_h:
-	(cd crypto/pem; $(MAKE) -e $(BUILDENV) pem.h; $(MAKE) clean)
+	(cd crypto/pem; $(MAKE) pem.h; $(MAKE) clean)
 
 install: all install_docs install_sw
 
