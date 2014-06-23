@@ -102,6 +102,8 @@ my ($dir, $makefile) = @_;
 
 my %sym;
 
+if (-e "$dir/build.mk") { $makefile = "build.mk"; }
+
 open (IN, "$dir/$makefile") || die "Can't open $dir/$makefile";
 
 my $s="";
