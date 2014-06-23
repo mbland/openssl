@@ -4,6 +4,7 @@ OBJ=		hw_ibmca.o
 HEADER=		hw_ibmca.h
 
 TOP= ../../..
+include $(TOP)/configure.mk
 include $(TOP)/common.mk
 include build.mk
 

@@ -4,6 +4,7 @@ OBJ=		rsaref.o
 HEADER=		rsaref.h
 
 TOP= ../../..
+include $(TOP)/configure.mk
 include $(TOP)/common.mk
 include build.mk
 

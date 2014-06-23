@@ -4,6 +4,7 @@ OBJ=		hw_zencod.o
 HEADER=		hw_zencod.h
 
 TOP= ../../..
+include $(TOP)/configure.mk
 include $(TOP)/common.mk
 include build.mk
 

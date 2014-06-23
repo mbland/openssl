@@ -8,6 +8,7 @@ CFLAGS= $(INCLUDES) $(CFLAG)
 LIB=$(TOP)/libcrypto.a
 
 TOP= ../..
+include $(TOP)/configure.mk
 include $(TOP)/common.mk
 include build.mk
 
