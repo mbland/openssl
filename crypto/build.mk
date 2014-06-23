@@ -6,8 +6,6 @@ DIR=		crypto
 INCLUDE=	-I. -I$(TOP) -I../include $(ZLIB_INCLUDE)
 # INCLUDES targets sudbirs!
 INCLUDES=	-I.. -I../.. -I../modes -I../asn1 -I../evp -I../../include $(ZLIB_INCLUDE)
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
-MAKEFILE=       Makefile
 RM=             rm -f
 
 RECURSIVE_MAKE=	[ -n "$(SDIRS)" ] && for i in $(SDIRS) ; do \

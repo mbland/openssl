@@ -4,7 +4,6 @@
 
 DIR=	mdc2
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

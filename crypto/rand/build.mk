@@ -4,7 +4,6 @@
 
 DIR=	rand
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

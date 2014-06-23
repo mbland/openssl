@@ -4,7 +4,6 @@
 
 DIR=	rc2
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

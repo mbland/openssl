@@ -5,7 +5,6 @@
 DIR=	aes
 CPP=	$(CC) -E
 INCLUDES=
-MAKEFILE=	Makefile
 
 
 CFLAGS= $(INCLUDES) $(CFLAG)

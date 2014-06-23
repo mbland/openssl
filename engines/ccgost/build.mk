@@ -1,6 +1,5 @@
 DIR=ccgost
 INCLUDES= -I../../include
-MAKEFILE= Makefile
 CFLAGS= $(INCLUDES) $(CFLAG)
 LIB=$(TOP)/libcrypto.a
 

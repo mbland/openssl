@@ -4,7 +4,6 @@
 
 DIR=	krb5
 INCLUDES= -I.. -I$(TOP) -I../../include
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

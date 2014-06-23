@@ -4,7 +4,6 @@
 
 DIR=		test
 INCLUDES=	-I$(TOP) -I../include $(KRB5_INCLUDES) -I$(TOP)/fips
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
 # KRB5 stuff
 TEST=		fips_algvs.c igetest.c
 

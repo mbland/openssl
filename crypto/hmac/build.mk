@@ -4,7 +4,6 @@
 
 DIR=	hmac
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

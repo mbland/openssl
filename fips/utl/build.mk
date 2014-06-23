@@ -4,10 +4,6 @@
 
 DIR=	utl
 INCLUDES=
-INSTALL_PREFIX=
-INSTALLTOP=/usr/local/ssl
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

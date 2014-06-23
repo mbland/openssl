@@ -4,7 +4,6 @@
 
 DIR=	lhash
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

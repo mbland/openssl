@@ -5,7 +5,6 @@
 DIR=    ripemd
 CPP=    $(CC) -E
 INCLUDES=
-MAKEFILE=       Makefile
 
 RIP_ASM_OBJ=
 

@@ -5,7 +5,6 @@
 DIR=	cast
 CPP=	$(CC) -E
 INCLUDES=
-MAKEFILE=	Makefile
 
 
 CFLAGS= $(INCLUDES) $(CFLAG)

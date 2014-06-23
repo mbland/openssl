@@ -4,7 +4,6 @@
 
 DIR=		apps
 INCLUDES=	-I$(TOP) -I../include $(KRB5_INCLUDES)
-MAKEFILE=	Makefile
 RM=		rm -f
 # KRB5 stuff
 

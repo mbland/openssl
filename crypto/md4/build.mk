@@ -5,7 +5,6 @@
 DIR=    md4
 CPP=    $(CC) -E
 INCLUDES=
-MAKEFILE=       Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

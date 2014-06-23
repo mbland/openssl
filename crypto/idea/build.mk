@@ -4,7 +4,6 @@
 
 DIR=	idea
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

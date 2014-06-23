@@ -5,7 +5,6 @@
 DIR=	des
 CPP=	$(CC) -E
 INCLUDES=-I$(TOP) -I../../include
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)

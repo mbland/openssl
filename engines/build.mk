@@ -4,7 +4,6 @@
 
 DIR=	engines
 INCLUDES= -I../include
-MAKEFILE=	Makefile
 
 RECURSIVE_MAKE=	[ -z "$(ENGDIRS)" ] || for i in $(ENGDIRS) ; do \
 		    (cd $$i && echo "making $$target in $(DIR)/$$i..." && \

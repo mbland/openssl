@@ -5,7 +5,6 @@
 DIR=    sha
 CPP=    $(CC) -E
 INCLUDES=
-MAKEFILE=       Makefile
 
 
 CFLAGS= $(INCLUDES) $(CFLAG)

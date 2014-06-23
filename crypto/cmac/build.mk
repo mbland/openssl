@@ -4,7 +4,6 @@
 
 DIR=	cmac
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

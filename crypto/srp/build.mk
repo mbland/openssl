@@ -1,9 +1,5 @@
 DIR=	srp
 INCLUDES= -I.. -I$(TOP) -I../../include
-INSTALL_PREFIX=
-INSTALLTOP=/usr/local/ssl
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
-MAKEFILE=	Makefile.ssl
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

@@ -4,7 +4,6 @@
 
 DIR=	stack
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

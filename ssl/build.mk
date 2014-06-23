@@ -4,7 +4,6 @@
 
 DIR=	ssl
 INCLUDES= -I../crypto -I$(TOP) -I../include $(KRB5_INCLUDES)
-MAKEFILE=	Makefile
 # KRB5 stuff
 
 CFLAGS= $(INCLUDES) $(CFLAG)

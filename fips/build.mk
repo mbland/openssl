@@ -6,8 +6,6 @@ DIR=		fips
 INCLUDE=	-I. -I$(TOP) -I../include
 # INCLUDES targets sudbirs!
 INCLUDES=	-I.. -I../.. -I../../include
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
-MAKEFILE=       Makefile
 RM=             rm -f
 ARD=		ar d
 TEST=		fips_test_suite.c

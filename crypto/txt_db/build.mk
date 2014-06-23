@@ -4,7 +4,6 @@
 
 DIR=	txt_db
 INCLUDES=
-MAKEFILE=	Makefile
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 
