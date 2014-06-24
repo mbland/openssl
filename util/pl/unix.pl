@@ -226,12 +226,6 @@ sub fixdeps
 sub fixrules
   {
   my ($str) = @_;
-
-  # Compatible with -j...
-  $str =~ s/^(\s+@?)/$1cd \$(TEST_D) && /;
-  return $str;
-
-  # Compatible with not -j.
   my @t = split("\n", $str);
   $str = '';
   my $prev;
