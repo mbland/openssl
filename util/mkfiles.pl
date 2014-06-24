@@ -146,6 +146,7 @@ foreach $makefile (@makefiles)
 		{
 			@top{ keys %sym } = @sym{ keys %sym };
 		}
+	close (IN);
 	}
 
 print "RELATIVE_DIRECTORY=$dir\n";
@@ -157,7 +158,6 @@ foreach (sort keys %sym)
 
 print "RELATIVE_DIRECTORY=\n";
 
-close (IN);
 if ($dir eq "." && $sym{FIPSCANISTERONLY} eq "y")
 	{
 	$fipscanisteronly = 1;
