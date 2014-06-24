@@ -4,18 +4,26 @@
 # It is basically a list of all variables from the passed makefile
 #
 
+my %top, my %sym;
+
+# Values specified on the command line take top precedence.
 while ($ARGV[0] =~ /^([^\s=]+)\s*=\s*(.*)$/)
 	{
+	$top{$1} = $2;
 	$sym{$1} = $2;
 	shift;
 	}
 
-$s="";
-while (<>)
+$top{'TOP'} ||
+	die 'TOP= must be specified on the command line before any files.';
+
+sub parse_var
 	{
-	chop;
-	s/#.*//;
-	if (/^([^\s=]+)\s*=\s*(.*)$/)
+	my ($line, $input_fh) = @_;
+	my $s="", my $b = "", my $o = "";
+	chop $line;
+	$line =~ s/#.*//;
+	if ($line =~ /^([^\s=]+)\s*=\s*(.*)$/)
 		{
 		$o="";
 		($s,$b)=($1,$2);
@@ -25,7 +33,7 @@ while (<>)
 				{
 				chop($b);
 				$o.=$b." ";
-				$b=<>;
+				$b=<$input_fh>;
 				chop($b);
 				}
 			else
@@ -38,9 +46,40 @@ while (<>)
 		$o =~ s/\s+$//;
 		$o =~ s/\s+/ /g;
 
-		$o =~ s/\$[({]([^)}]+)[)}]/$sym{$1}/g;
-		$sym{$s}=$o if !exists $sym{$s};
+		$o =~ s/\$[({]([^)}]+)[)}]/$top{$1} or $sym{$1}/ge;
 		}
+	else
+		{
+		undef $s;
+		undef $o;
+		}
+	return ($s, $o);
+	}
+
+# Values from $(TOP)/configure.mk take precedence after command-line values.
+$configure_mk_path = "$sym{'TOP'}/configure.mk";
+open my $configure_mk, $configure_mk_path ||
+	die "Couldn't open $configure_mk_path";
+while (<$configure_mk>)
+	{
+	my ($s, $o) = parse_var $_, $configure_mk;
+	if (defined $s) { $top{$s}=$o if !exists $top{$s}; }
+	}
+close $configure_mk;
+
+while ($ARGV = shift)
+	{
+	open $makefile, $ARGV || die "Couldn't open $ARGV";
+  while (<$makefile>)
+		{
+		my ($s, $o) = parse_var $_, $makefile;
+		if (defined $s)
+			{
+			if (exists $top{$s}) { $sym{$s} = $top{$s}; }
+			elsif (!exists $sym{$s}) { $sym{$s} = $o; }
+			}
+		}
+	close $makefile;
 	}
 
 $pwd=`pwd`; chop($pwd);
