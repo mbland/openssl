@@ -61,7 +61,7 @@ rc4-ia64.s: rc4-ia64.S
 rc4-%.s:	asm/rc4-%.pl;	$(PERL) $< $(PERLASM_SCHEME) $@
 
 files:
-	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)

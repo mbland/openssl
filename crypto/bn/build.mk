@@ -142,7 +142,7 @@ armv4-mont.o:	armv4-mont.S
 armv4-gf2m.o:	armv4-gf2m.S
 
 files:
-	$(PERL) $(TOP)/util/files.pl Makefile build.mk >> $(TOP)/MINFO
+	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile build.mk >> $(TOP)/MINFO
 
 links:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
