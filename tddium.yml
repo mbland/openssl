@@ -1,0 +1,4 @@
+:tddium:
+  :test_pattern: 'none'
+  :tests:
+    - './config && make && make test'
