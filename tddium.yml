@@ -1,4 +1,5 @@
 :tddium:
   :test_pattern: 'none'
   :tests:
-    - './config && make && make test'
+    - './config && make && make TESTS="$(perl test/get-test-shard.pl test/Makefile --num_shards 2 --shard 0)" test'
+    - './config && make && make TESTS="$(perl test/get-test-shard.pl test/Makefile --num_shards 2 --shard 1)" test'
