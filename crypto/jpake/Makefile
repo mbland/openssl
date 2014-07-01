@@ -42,7 +42,7 @@ dclean:
 	mv -f Makefile.new $(MAKEFILE)
 
 clean:
-	rm -f *.s *.o *.obj des lib tags core .pure .nfs* *.old *.bak fluff
+	rm -f *.s *.o *.d *.obj des lib tags core .pure .nfs* *.old *.bak fluff
 
 jpaketest: top jpaketest.c $(LIB)
 	$(CC) $(CFLAGS) -Wall -Werror -g -o jpaketest jpaketest.c $(LIB)
