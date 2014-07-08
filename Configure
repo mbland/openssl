@@ -1696,6 +1696,7 @@ if ($fipscanisterinternal eq "y")
 	}
 
 my $mforg = $fipscanisteronly ? "Makefile.fips" : "Makefile.org";
+my $cforg = $fipscanisteronly ? "configure.mk.fips" : "configure.mk.org";
 
 sub process_makefile
 	{
@@ -1832,6 +1833,7 @@ sub process_makefile
 	}
 
 process_makefile $mforg;
+process_makefile $cforg;
 
 print "CC            =$cc\n";
 print "CFLAG         =$cflags\n";
