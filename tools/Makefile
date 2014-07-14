@@ -5,7 +5,7 @@
 DIR_tools=	tools
 TOP_tools=	..
 include $(TOP_tools)/configure.mk
-INCLUDES_tools= -I$(TOP_tools) -I../../include
+INCLUDES_tools= -I$(TOP_tools) -I../include
 
 CFLAGS_tools= $(INCLUDES_tools) $(CFLAG)
 
