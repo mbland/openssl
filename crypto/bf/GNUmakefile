@@ -4,3 +4,8 @@
 
 include crypto/bf/Makefile
 -include $(SRC_crypto_bf:.c=.d)
+
+crypto/bf/%.o: crypto/bf/%.c
+	$(CC) $(CFLAGS_crypto_bf) $(CPPFLAGS) -c -o $@ $<
+crypto/bf/%.s: crypto/bf/%.S
+	$(CPP_crypto_bf) $(CPPFLAGS) -o $@ $<
