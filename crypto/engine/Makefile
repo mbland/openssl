@@ -75,7 +75,7 @@ dclean_crypto_engine:
 
 clean: clean_crypto_engine
 clean_crypto_engine:
-	rm -f crypto/engine/*.o crypto/engine/*.d */*.o */*.d crypto/engine/*.obj crypto/engine/lib tags crypto/engine/core crypto/engine/.pure crypto/engine/.nfs* crypto/engine/*.old crypto/engine/*.bak crypto/engine/fluff
+	rm -f crypto/engine/*.o crypto/engine/*.d */*.o */*.d crypto/engine/*.obj crypto/engine/lib crypto/engine/tags crypto/engine/core crypto/engine/.pure crypto/engine/.nfs* crypto/engine/*.old crypto/engine/*.bak crypto/engine/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_engine) $(CPPFLAGS) -c -o $@ $<

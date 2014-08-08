@@ -65,7 +65,7 @@ dclean_crypto_pqueue:
 
 clean: clean_crypto_pqueue
 clean_crypto_pqueue:
-	rm -f crypto/pqueue/*.o crypto/pqueue/*.d crypto/pqueue/*.obj crypto/pqueue/lib tags crypto/pqueue/core crypto/pqueue/.pure crypto/pqueue/.nfs* crypto/pqueue/*.old crypto/pqueue/*.bak crypto/pqueue/fluff
+	rm -f crypto/pqueue/*.o crypto/pqueue/*.d crypto/pqueue/*.obj crypto/pqueue/lib crypto/pqueue/tags crypto/pqueue/core crypto/pqueue/.pure crypto/pqueue/.nfs* crypto/pqueue/*.old crypto/pqueue/*.bak crypto/pqueue/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_pqueue) $(CPPFLAGS) -c -o $@ $<

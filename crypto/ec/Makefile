@@ -74,7 +74,7 @@ dclean_crypto_ec:
 
 clean: clean_crypto_ec
 clean_crypto_ec:
-	rm -f crypto/ec/*.o crypto/ec/*.d */*.o */*.d crypto/ec/*.obj crypto/ec/lib tags crypto/ec/core crypto/ec/.pure crypto/ec/.nfs* crypto/ec/*.old crypto/ec/*.bak crypto/ec/fluff
+	rm -f crypto/ec/*.o crypto/ec/*.d */*.o */*.d crypto/ec/*.obj crypto/ec/lib crypto/ec/tags crypto/ec/core crypto/ec/.pure crypto/ec/.nfs* crypto/ec/*.old crypto/ec/*.bak crypto/ec/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_ec) $(CPPFLAGS) -c -o $@ $<

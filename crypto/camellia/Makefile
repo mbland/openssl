@@ -78,7 +78,7 @@ dclean_crypto_camellia:
 
 clean: clean_crypto_camellia
 clean_crypto_camellia:
-	rm -f crypto/camellia/*.s crypto/camellia/*.o crypto/camellia/*.d crypto/camellia/*.obj crypto/camellia/lib tags crypto/camellia/core crypto/camellia/.pure crypto/camellia/.nfs* crypto/camellia/*.old crypto/camellia/*.bak crypto/camellia/fluff
+	rm -f crypto/camellia/*.s crypto/camellia/*.o crypto/camellia/*.d crypto/camellia/*.obj crypto/camellia/lib crypto/camellia/tags crypto/camellia/core crypto/camellia/.pure crypto/camellia/.nfs* crypto/camellia/*.old crypto/camellia/*.bak crypto/camellia/fluff
 
 .S.s:
 	$(CPP_crypto_camellia) $(CPPFLAGS) -o $@ $<

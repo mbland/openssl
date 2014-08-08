@@ -65,7 +65,7 @@ dclean_fips_ecdh:
 
 clean: clean_fips_ecdh
 clean_fips_ecdh:
-	rm -f fips/ecdh/*.o fips/ecdh/*.d fips/ecdh/*.obj fips/ecdh/lib tags fips/ecdh/core fips/ecdh/.pure fips/ecdh/.nfs* fips/ecdh/*.old fips/ecdh/*.bak fips/ecdh/fluff
+	rm -f fips/ecdh/*.o fips/ecdh/*.d fips/ecdh/*.obj fips/ecdh/lib fips/ecdh/tags fips/ecdh/core fips/ecdh/.pure fips/ecdh/.nfs* fips/ecdh/*.old fips/ecdh/*.bak fips/ecdh/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_fips_ecdh) $(CPPFLAGS) -c -o $@ $<

@@ -68,7 +68,7 @@ dclean_crypto_pem:
 
 clean: clean_crypto_pem
 clean_crypto_pem:
-	rm -f crypto/pem/*.o crypto/pem/*.d crypto/pem/*.obj crypto/pem/lib tags crypto/pem/core crypto/pem/.pure crypto/pem/.nfs* crypto/pem/*.old crypto/pem/*.bak crypto/pem/fluff
+	rm -f crypto/pem/*.o crypto/pem/*.d crypto/pem/*.obj crypto/pem/lib crypto/pem/tags crypto/pem/core crypto/pem/.pure crypto/pem/.nfs* crypto/pem/*.old crypto/pem/*.bak crypto/pem/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_pem) $(CPPFLAGS) -c -o $@ $<

@@ -18,7 +18,7 @@ demos/easy_tls/auto-all:
 	esac
 
 all: all_demos_easy_tls
-all_demos_easy_tls: test_demos_easy_tls TAGS
+all_demos_easy_tls: test_demos_easy_tls demos/easy_tls/TAGS
 
 # For adapting this Makefile to a different system, only the following
 # definitions should need customizing:
@@ -81,8 +81,8 @@ demos/easy_tls/tls.tgz: $(EVERYTHING)
 	gzip -9 > demos/easy_tls/tls.tgz
 
 # For emacs:
-demos/easy_tls/etags: TAGS
-TAGS: $(SOURCES) $(HEADERS)
+demos/easy_tls/etags: demos/easy_tls/TAGS
+demos/easy_tls/TAGS: $(SOURCES) $(HEADERS)
 	-etags $(SOURCES) $(HEADERS)
 
 
@@ -112,7 +112,7 @@ OBJS_demos_easy_tls=demos/easy_tls/easy-tls.o demos/easy_tls/test.o
 clean: clean_demos_easy_tls
 clean_demos_easy_tls:
 	demos/easy_tls/@rm -f test
-	demos/easy_tls/@rm -f TAGS
+	demos/easy_tls/@rm -f demos/easy_tls/TAGS
 	demos/easy_tls/@rm -f demos/easy_tls/*.o
 	demos/easy_tls/@rm -f demos/easy_tls/core
 

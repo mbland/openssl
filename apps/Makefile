@@ -127,7 +127,7 @@ dclean_apps:
 
 clean: clean_apps
 clean_apps:
-	rm -f apps/*.o apps/*.d apps/*.obj apps/*.dll apps/lib tags apps/core apps/.pure apps/.nfs* apps/*.old apps/*.bak apps/fluff $(EXE_apps)
+	rm -f apps/*.o apps/*.d apps/*.obj apps/*.dll apps/lib apps/tags apps/core apps/.pure apps/.nfs* apps/*.old apps/*.bak apps/fluff $(EXE_apps)
 	rm -f apps/req
 
 $(DLIBSSL_apps):

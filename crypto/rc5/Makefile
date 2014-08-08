@@ -72,7 +72,7 @@ dclean_crypto_rc5:
 
 clean: clean_crypto_rc5
 clean_crypto_rc5:
-	rm -f crypto/rc5/*.s crypto/rc5/*.o crypto/rc5/*.d crypto/rc5/*.obj crypto/rc5/lib tags crypto/rc5/core crypto/rc5/.pure crypto/rc5/.nfs* crypto/rc5/*.old crypto/rc5/*.bak crypto/rc5/fluff
+	rm -f crypto/rc5/*.s crypto/rc5/*.o crypto/rc5/*.d crypto/rc5/*.obj crypto/rc5/lib crypto/rc5/tags crypto/rc5/core crypto/rc5/.pure crypto/rc5/.nfs* crypto/rc5/*.old crypto/rc5/*.bak crypto/rc5/fluff
 
 .S.s:
 	$(CPP_crypto_rc5) $(CPPFLAGS) -o $@ $<

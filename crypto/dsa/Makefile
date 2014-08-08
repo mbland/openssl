@@ -67,7 +67,7 @@ dclean_crypto_dsa:
 
 clean: clean_crypto_dsa
 clean_crypto_dsa:
-	rm -f crypto/dsa/*.o crypto/dsa/*.d */*.o */*.d crypto/dsa/*.obj crypto/dsa/lib tags crypto/dsa/core crypto/dsa/.pure crypto/dsa/.nfs* crypto/dsa/*.old crypto/dsa/*.bak crypto/dsa/fluff
+	rm -f crypto/dsa/*.o crypto/dsa/*.d */*.o */*.d crypto/dsa/*.obj crypto/dsa/lib crypto/dsa/tags crypto/dsa/core crypto/dsa/.pure crypto/dsa/.nfs* crypto/dsa/*.old crypto/dsa/*.bak crypto/dsa/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_dsa) $(CPPFLAGS) -c -o $@ $<

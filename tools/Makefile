@@ -52,7 +52,7 @@ dclean_tools:
 
 clean: clean_tools
 clean_tools:
-	rm -f tools/*.o tools/*.d tools/*.obj tools/lib tags tools/core tools/.pure tools/.nfs* tools/*.old tools/*.bak tools/fluff
+	rm -f tools/*.o tools/*.d tools/*.obj tools/lib tools/tags tools/core tools/.pure tools/.nfs* tools/*.old tools/*.bak tools/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_tools) $(CPPFLAGS) -c -o $@ $<

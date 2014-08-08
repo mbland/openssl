@@ -66,7 +66,7 @@ dclean_crypto_krb5:
 
 clean: clean_crypto_krb5
 clean_crypto_krb5:
-	rm -f crypto/krb5/*.o crypto/krb5/*.d crypto/krb5/*.obj crypto/krb5/lib tags crypto/krb5/core crypto/krb5/.pure crypto/krb5/.nfs* crypto/krb5/*.old crypto/krb5/*.bak crypto/krb5/fluff
+	rm -f crypto/krb5/*.o crypto/krb5/*.d crypto/krb5/*.obj crypto/krb5/lib crypto/krb5/tags crypto/krb5/core crypto/krb5/.pure crypto/krb5/.nfs* crypto/krb5/*.old crypto/krb5/*.bak crypto/krb5/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_krb5) $(CPPFLAGS) -c -o $@ $<

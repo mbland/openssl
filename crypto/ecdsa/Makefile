@@ -66,7 +66,7 @@ dclean_crypto_ecdsa:
 
 clean: clean_crypto_ecdsa
 clean_crypto_ecdsa:
-	rm -f crypto/ecdsa/*.o crypto/ecdsa/*.d */*.o */*.d crypto/ecdsa/*.obj crypto/ecdsa/lib tags crypto/ecdsa/core crypto/ecdsa/.pure crypto/ecdsa/.nfs* crypto/ecdsa/*.old crypto/ecdsa/*.bak crypto/ecdsa/fluff
+	rm -f crypto/ecdsa/*.o crypto/ecdsa/*.d */*.o */*.d crypto/ecdsa/*.obj crypto/ecdsa/lib crypto/ecdsa/tags crypto/ecdsa/core crypto/ecdsa/.pure crypto/ecdsa/.nfs* crypto/ecdsa/*.old crypto/ecdsa/*.bak crypto/ecdsa/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_ecdsa) $(CPPFLAGS) -c -o $@ $<

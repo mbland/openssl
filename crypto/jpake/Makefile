@@ -37,7 +37,7 @@ dclean_crypto_jpake:
 
 clean: clean_crypto_jpake
 clean_crypto_jpake:
-	rm -f crypto/jpake/*.s crypto/jpake/*.o crypto/jpake/*.d crypto/jpake/*.obj crypto/jpake/des crypto/jpake/lib tags crypto/jpake/core crypto/jpake/.pure crypto/jpake/.nfs* crypto/jpake/*.old crypto/jpake/*.bak crypto/jpake/fluff
+	rm -f crypto/jpake/*.s crypto/jpake/*.o crypto/jpake/*.d crypto/jpake/*.obj crypto/jpake/des crypto/jpake/lib crypto/jpake/tags crypto/jpake/core crypto/jpake/.pure crypto/jpake/.nfs* crypto/jpake/*.old crypto/jpake/*.bak crypto/jpake/fluff
 
 crypto/jpake/jpaketest: top_crypto_jpake crypto/jpake/jpaketest.c $(LIB_crypto_jpake)
 	$(CC) $(CFLAGS_crypto_jpake) -Wall -Werror -g -o crypto/jpake/jpaketest crypto/jpake/jpaketest.c $(LIB_crypto_jpake)

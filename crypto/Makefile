@@ -101,7 +101,7 @@ install_crypto:
 
 clean: clean_crypto
 clean_crypto:
-	rm -f crypto/buildinf.h crypto/*.s crypto/*.o crypto/*.d */*.o */*.d crypto/*.obj crypto/lib tags crypto/core crypto/.pure crypto/.nfs* crypto/*.old crypto/*.bak crypto/fluff
+	rm -f crypto/buildinf.h crypto/*.s crypto/*.o crypto/*.d */*.o */*.d crypto/*.obj crypto/lib crypto/tags crypto/core crypto/.pure crypto/.nfs* crypto/*.old crypto/*.bak crypto/fluff
 
 dclean: dclean_crypto
 dclean_crypto:

@@ -167,7 +167,7 @@ install_fips: fips/install_fips_subdirs
 clean: clean_fips
 clean_fips:
 	rm -f fips/fipscanister.o.sha1 fips/fips_premain_dso$(EXE_EXT) fips/fips_standalone_sha1$(EXE_EXT) \
-		fips/*.s fips/*.o fips/*.d */*.o */*.d fips/*.obj fips/lib tags fips/core fips/.pure fips/.nfs* fips/*.old fips/*.bak fips/fluff
+		fips/*.s fips/*.o fips/*.d */*.o */*.d fips/*.obj fips/lib fips/tags fips/core fips/.pure fips/.nfs* fips/*.old fips/*.bak fips/fluff
 
 dclean: dclean_fips
 dclean_fips:

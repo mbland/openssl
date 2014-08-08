@@ -67,7 +67,7 @@ dclean_crypto_store:
 
 clean: clean_crypto_store
 clean_crypto_store:
-	rm -f crypto/store/*.o crypto/store/*.d */*.o */*.d crypto/store/*.obj crypto/store/lib tags crypto/store/core crypto/store/.pure crypto/store/.nfs* crypto/store/*.old crypto/store/*.bak crypto/store/fluff
+	rm -f crypto/store/*.o crypto/store/*.d */*.o */*.d crypto/store/*.obj crypto/store/lib crypto/store/tags crypto/store/core crypto/store/.pure crypto/store/.nfs* crypto/store/*.old crypto/store/*.bak crypto/store/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_store) $(CPPFLAGS) -c -o $@ $<

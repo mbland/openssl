@@ -72,7 +72,7 @@ dclean_fips_des:
 
 clean: clean_fips_des
 clean_fips_des:
-	rm -f fips/des/*.o fips/des/*.d asm/*.o fips/des/*.obj fips/des/lib tags fips/des/core fips/des/.pure fips/des/.nfs* fips/des/*.old fips/des/*.bak fips/des/fluff fips/des/testlist
+	rm -f fips/des/*.o fips/des/*.d asm/*.o fips/des/*.obj fips/des/lib fips/des/tags fips/des/core fips/des/.pure fips/des/.nfs* fips/des/*.old fips/des/*.bak fips/des/fluff fips/des/testlist
 
 .c.o:
 	$(CC) $(CFLAGS_fips_des) $(CPPFLAGS) -c -o $@ $<

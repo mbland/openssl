@@ -66,7 +66,7 @@ dclean_crypto_seed:
 
 clean: clean_crypto_seed
 clean_crypto_seed:
-	rm -f crypto/seed/*.o crypto/seed/*.d crypto/seed/*.obj crypto/seed/lib tags crypto/seed/core crypto/seed/.pure crypto/seed/.nfs* crypto/seed/*.old crypto/seed/*.bak crypto/seed/fluff
+	rm -f crypto/seed/*.o crypto/seed/*.d crypto/seed/*.obj crypto/seed/lib crypto/seed/tags crypto/seed/core crypto/seed/.pure crypto/seed/.nfs* crypto/seed/*.old crypto/seed/*.bak crypto/seed/fluff
 
 .S.s:
 	$(CPP_crypto_seed) $(CPPFLAGS) -o $@ $<

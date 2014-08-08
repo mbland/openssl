@@ -68,7 +68,7 @@ dclean_crypto_comp:
 
 clean: clean_crypto_comp
 clean_crypto_comp:
-	rm -f crypto/comp/*.o crypto/comp/*.d crypto/comp/*.obj crypto/comp/lib tags crypto/comp/core crypto/comp/.pure crypto/comp/.nfs* crypto/comp/*.old crypto/comp/*.bak crypto/comp/fluff
+	rm -f crypto/comp/*.o crypto/comp/*.d crypto/comp/*.obj crypto/comp/lib crypto/comp/tags crypto/comp/core crypto/comp/.pure crypto/comp/.nfs* crypto/comp/*.old crypto/comp/*.bak crypto/comp/fluff
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_comp) $(CPPFLAGS) -c -o $@ $<

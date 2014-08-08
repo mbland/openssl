@@ -70,7 +70,7 @@ dclean_crypto_ts:
 
 clean: clean_crypto_ts
 clean_crypto_ts:
-	rm -f crypto/ts/*.o crypto/ts/*.d crypto/ts/*.obj crypto/ts/lib tags crypto/ts/core crypto/ts/.pure crypto/ts/.nfs* crypto/ts/*.old crypto/ts/*.bak crypto/ts/fluff crypto/ts/enc crypto/ts/dec crypto/ts/sign crypto/ts/verify
+	rm -f crypto/ts/*.o crypto/ts/*.d crypto/ts/*.obj crypto/ts/lib crypto/ts/tags crypto/ts/core crypto/ts/.pure crypto/ts/.nfs* crypto/ts/*.old crypto/ts/*.bak crypto/ts/fluff crypto/ts/enc crypto/ts/dec crypto/ts/sign crypto/ts/verify
 
 .c.o:
 	$(CC) $(CFLAGS_crypto_ts) $(CPPFLAGS) -c -o $@ $<

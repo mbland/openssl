@@ -127,7 +127,7 @@ dclean_crypto_sha:
 
 clean: clean_crypto_sha
 clean_crypto_sha:
-	rm -f crypto/sha/*.s crypto/sha/*.o crypto/sha/*.d crypto/sha/*.obj crypto/sha/lib tags crypto/sha/core crypto/sha/.pure crypto/sha/.nfs* crypto/sha/*.old crypto/sha/*.bak crypto/sha/fluff
+	rm -f crypto/sha/*.s crypto/sha/*.o crypto/sha/*.d crypto/sha/*.obj crypto/sha/lib crypto/sha/tags crypto/sha/core crypto/sha/.pure crypto/sha/.nfs* crypto/sha/*.old crypto/sha/*.bak crypto/sha/fluff
 
 .S.s:
 	$(CPP_crypto_sha) $(CPPFLAGS) -o $@ $<

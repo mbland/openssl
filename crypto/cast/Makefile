@@ -72,7 +72,7 @@ dclean_crypto_cast:
 
 clean: clean_crypto_cast
 clean_crypto_cast:
-	rm -f crypto/cast/*.s crypto/cast/*.o crypto/cast/*.d crypto/cast/*.obj crypto/cast/lib tags crypto/cast/core crypto/cast/.pure crypto/cast/.nfs* crypto/cast/*.old crypto/cast/*.bak crypto/cast/fluff
+	rm -f crypto/cast/*.s crypto/cast/*.o crypto/cast/*.d crypto/cast/*.obj crypto/cast/lib crypto/cast/tags crypto/cast/core crypto/cast/.pure crypto/cast/.nfs* crypto/cast/*.old crypto/cast/*.bak crypto/cast/fluff
 
 .S.s:
 	$(CPP_crypto_cast) $(CPPFLAGS) -o $@ $<

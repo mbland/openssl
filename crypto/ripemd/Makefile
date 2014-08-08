@@ -73,7 +73,7 @@ dclean_crypto_ripemd:
 
 clean: clean_crypto_ripemd
 clean_crypto_ripemd:
-	rm -f crypto/ripemd/*.s crypto/ripemd/*.o crypto/ripemd/*.d crypto/ripemd/*.obj crypto/ripemd/lib tags crypto/ripemd/core crypto/ripemd/.pure crypto/ripemd/.nfs* crypto/ripemd/*.old crypto/ripemd/*.bak crypto/ripemd/fluff
+	rm -f crypto/ripemd/*.s crypto/ripemd/*.o crypto/ripemd/*.d crypto/ripemd/*.obj crypto/ripemd/lib crypto/ripemd/tags crypto/ripemd/core crypto/ripemd/.pure crypto/ripemd/.nfs* crypto/ripemd/*.old crypto/ripemd/*.bak crypto/ripemd/fluff
 
 .S.s:
 	$(CPP_crypto_ripemd) $(CPPFLAGS) -o $@ $<

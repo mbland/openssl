@@ -395,7 +395,7 @@ dclean_test:
 
 clean: clean_test
 clean_test:
-	rm -f test/.rnd tmp.bntest test/tmp.bctest test/*.o test/*.d test/*.obj test/*.dll test/lib tags test/core test/.pure test/.nfs* test/*.old test/*.bak test/fluff $(EXE_test) $(FIPSEXE) test/*.ss test/*.srl test/log test/dummytest
+	rm -f test/.rnd test/tmp.bntest test/tmp.bctest test/*.o test/*.d test/*.obj test/*.dll test/lib test/tags test/core test/.pure test/.nfs* test/*.old test/*.bak test/fluff $(EXE_test) $(FIPSEXE) test/*.ss test/*.srl test/log test/dummytest
 
 $(DLIBSSL_test):
 	(cd test/..; $(MAKE) DIRS=ssl all)

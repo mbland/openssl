@@ -76,7 +76,7 @@ dclean_crypto_bf:
 
 clean: clean_crypto_bf
 clean_crypto_bf:
-	rm -f crypto/bf/*.s crypto/bf/*.o crypto/bf/*.d crypto/bf/*.obj crypto/bf/lib tags crypto/bf/core crypto/bf/.pure crypto/bf/.nfs* crypto/bf/*.old crypto/bf/*.bak crypto/bf/fluff
+	rm -f crypto/bf/*.s crypto/bf/*.o crypto/bf/*.d crypto/bf/*.obj crypto/bf/lib crypto/bf/tags crypto/bf/core crypto/bf/.pure crypto/bf/.nfs* crypto/bf/*.old crypto/bf/*.bak crypto/bf/fluff
 
 .S.s:
 	$(CPP_crypto_bf) $(CPPFLAGS) -o $@ $<
