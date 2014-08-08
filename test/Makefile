@@ -177,10 +177,7 @@ tags_test:
 	ctags $(SRC_test)
 
 tests: tests_test
-tests_test:	exe_test apps $(TESTS_test)
-
-apps:
-	@(cd test/..; $(MAKE) DIRS=apps all)
+tests_test:	exe_test all_apps $(TESTS_test)
 
 test/alltests: \
 	test/test_des test/test_idea test/test_sha test/test_md4 test/test_md5 test/test_hmac \
@@ -624,5 +621,5 @@ $(HEARTBEATTEST)$(EXE_EXT): $(HEARTBEATTEST).o $(DLIBCRYPTO_test) test/testutil.
 #	fi
 
 test/dummytest$(EXE_EXT): test/dummytest.o $(DLIBCRYPTO_test)
-	@target=dummytest; $(BUILD_CMD_test)
+	@target=test/dummytest; $(BUILD_CMD_test)
 
