@@ -632,5 +632,3 @@ $(HEARTBEATTEST)$(EXE_EXT): $(HEARTBEATTEST).o $(DLIBCRYPTO_test) test/testutil.
 test/dummytest$(EXE_EXT): test/dummytest.o $(DLIBCRYPTO_test)
 	@target=dummytest; $(BUILD_CMD_test)
 
-.c.o:
-	$(CC) $(CFLAGS_test) $(CPPFLAGS) -c -o $@ $<

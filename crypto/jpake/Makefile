@@ -42,5 +42,3 @@ clean_crypto_jpake:
 crypto/jpake/jpaketest: top_crypto_jpake crypto/jpake/jpaketest.c $(LIB_crypto_jpake)
 	$(CC) $(CFLAGS_crypto_jpake) -Wall -Werror -g -o crypto/jpake/jpaketest crypto/jpake/jpaketest.c $(LIB_crypto_jpake)
 
-.c.o:
-	$(CC) $(CFLAGS_crypto_jpake) $(CPPFLAGS) -c -o $@ $<

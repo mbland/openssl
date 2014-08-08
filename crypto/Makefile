@@ -109,7 +109,3 @@ dclean_crypto:
 
 crypto/cversion.c: crypto/buildinf.h
 
-.c.o:
-	$(CC) $(CFLAGS_crypto) $(CPPFLAGS) -c -o $@ $<
-.s.o:
-	$(AS) $(ASFLAGS_crypto) -o $@ $<
