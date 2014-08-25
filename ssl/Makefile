@@ -4,6 +4,7 @@
 
 DIR=	ssl
 TOP=	..
+include $(TOP)/configure.mk
 CC=	cc
 INCLUDES= -I../crypto -I$(TOP) -I../include $(KRB5_INCLUDES)
 CFLAG=-g
@@ -103,6 +104,7 @@ dclean:
 clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 bio_ssl.o: ../include/openssl/asn1.h ../include/openssl/bio.h

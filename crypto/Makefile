@@ -4,6 +4,7 @@
 
 DIR=		crypto
 TOP=		..
+include $(TOP)/configure.mk
 CC=		cc
 INCLUDE=	-I. -I$(TOP) -I../include $(ZLIB_INCLUDE)
 # INCLUDES targets sudbirs!
@@ -148,6 +149,7 @@ dclean:
 	rm -f opensslconf.h
 	@target=dclean; $(RECURSIVE_MAKE)
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 cpt_err.o: ../include/openssl/bio.h ../include/openssl/crypto.h

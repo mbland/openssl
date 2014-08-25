@@ -3,6 +3,7 @@
 ##
 
 VERSION=
+include configure.mk
 MAJOR=
 MINOR=
 SHLIB_VERSION_NUMBER=
@@ -774,4 +775,5 @@ install_docs:
 			 done); \
 	done
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.

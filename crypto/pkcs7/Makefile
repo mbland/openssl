@@ -4,6 +4,7 @@
 
 DIR=	pkcs7
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 INCLUDES= -I.. -I$(TOP) -I../../include
 CFLAG=-g
@@ -79,6 +80,7 @@ dclean:
 clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff enc dec sign verify
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 bio_pk7.o: ../../include/openssl/asn1.h ../../include/openssl/bio.h

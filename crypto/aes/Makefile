@@ -4,6 +4,7 @@
 
 DIR=	aes
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 CPP=	$(CC) -E
 INCLUDES=
@@ -133,6 +134,7 @@ dclean:
 clean:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 aes_cbc.o: ../../include/openssl/aes.h ../../include/openssl/modes.h

@@ -4,6 +4,7 @@
 
 DIR=	des
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 CPP=	$(CC) -E
 INCLUDES=-I$(TOP) -I../../include
@@ -107,6 +108,7 @@ dclean:
 clean:
 	rm -f *.s *.o *.d *.obj des lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 cbc_cksm.o: ../../include/openssl/des.h ../../include/openssl/des_old.h

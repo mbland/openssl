@@ -4,6 +4,7 @@
 
 DIR=	bf
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 CPP=	$(CC) -E
 INCLUDES=
@@ -83,6 +84,7 @@ dclean:
 clean:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 bf_cfb64.o: ../../include/openssl/blowfish.h ../../include/openssl/e_os2.h

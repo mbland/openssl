@@ -4,6 +4,7 @@
 
 DIR=	engines
 TOP=	..
+include $(TOP)/configure.mk
 CC=	cc
 INCLUDES= -I../include
 CFLAG=-g
@@ -171,6 +172,7 @@ clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 	@target=clean; $(RECURSIVE_MAKE)
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 e_4758cca.o: ../include/openssl/asn1.h ../include/openssl/bio.h

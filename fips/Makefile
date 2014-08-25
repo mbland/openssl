@@ -4,6 +4,7 @@
 
 DIR=		fips
 TOP=		..
+include $(TOP)/configure.mk
 CC=		cc
 INCLUDE=	-I. -I$(TOP) -I../include
 # INCLUDES targets sudbirs!
@@ -217,6 +218,7 @@ dclean:
 	mv -f Makefile.new $(MAKEFILE)
 	@target=dclean; $(RECURSIVE_MAKE)
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 fips.o: ../include/openssl/aes.h ../include/openssl/asn1.h

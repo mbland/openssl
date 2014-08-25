@@ -4,6 +4,7 @@
 
 DIR=	rc5
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 CPP=	$(CC) -E
 INCLUDES=
@@ -80,6 +81,7 @@ dclean:
 clean:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 rc5_ecb.o: ../../include/openssl/opensslconf.h ../../include/openssl/opensslv.h

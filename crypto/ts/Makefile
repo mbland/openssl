@@ -4,6 +4,7 @@
 
 DIR=	ts
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 INCLUDES= -I.. -I../../include
 CFLAG = -g
@@ -83,6 +84,7 @@ dclean:
 clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff enc dec sign verify
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 ts_asn1.o: ../../include/openssl/asn1.h ../../include/openssl/asn1t.h

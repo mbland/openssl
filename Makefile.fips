@@ -3,6 +3,7 @@
 ##
 
 VERSION=fips-2.0-test
+include configure.mk
 MAJOR=
 MINOR=
 SHLIB_VERSION_NUMBER=
@@ -630,4 +631,5 @@ install_sw:
 	done;
 	@set -e; target=install; $(RECURSIVE_BUILD_CMD)
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.

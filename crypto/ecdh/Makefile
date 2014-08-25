@@ -4,6 +4,7 @@
 
 DIR=	ecdh
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 INCLUDES= -I.. -I$(TOP) -I../../include
 CFLAG=-g -Wall
@@ -73,6 +74,7 @@ dclean:
 clean:
 	rm -f *.o *.d */*.o */*.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 ech_err.o: ../../include/openssl/asn1.h ../../include/openssl/bio.h

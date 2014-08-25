@@ -4,6 +4,7 @@
 
 DIR=	rand
 TOP=	../..
+include $(TOP)/configure.mk
 CC=	cc
 INCLUDES=
 CFLAG=-g
@@ -74,6 +75,7 @@ dclean:
 clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 md_rand.o: ../../e_os.h ../../include/openssl/asn1.h

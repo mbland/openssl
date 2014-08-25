@@ -4,6 +4,7 @@
 
 DIR=		apps
 TOP=		..
+include $(TOP)/configure.mk
 CC=		cc
 INCLUDES=	-I$(TOP) -I../include $(KRB5_INCLUDES)
 CFLAG=		-g -static
@@ -165,6 +166,7 @@ progs.h: progs.pl
 	$(PERL) progs.pl $(E_EXE) >progs.h
 	$(RM) $(PROGRAM).o
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 app_rand.o: ../e_os.h ../include/openssl/asn1.h ../include/openssl/bio.h

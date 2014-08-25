@@ -4,6 +4,7 @@
 
 DIR=    md4
 TOP=    ../..
+include $(TOP)/configure.mk
 CC=     cc
 CPP=    $(CC) -E
 INCLUDES=
@@ -74,6 +75,7 @@ dclean:
 clean:
 	rm -f asm/mx86unix.cpp *.o *.d asm/*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 md4_dgst.o: ../../include/openssl/e_os2.h ../../include/openssl/md4.h

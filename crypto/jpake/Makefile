@@ -1,5 +1,6 @@
 DIR=jpake
 TOP=../..
+include $(TOP)/configure.mk
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 
@@ -44,6 +45,7 @@ dclean:
 clean:
 	rm -f *.s *.o *.d *.obj des lib tags core .pure .nfs* *.old *.bak fluff
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 jpake.o: ../../include/openssl/bio.h ../../include/openssl/bn.h

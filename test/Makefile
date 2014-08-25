@@ -4,6 +4,7 @@
 
 DIR=		test
 TOP=		..
+include $(TOP)/configure.mk
 CC=		cc
 INCLUDES=	-I$(TOP) -I../include $(KRB5_INCLUDES) -I$(TOP)/fips
 CFLAG=		-g
@@ -652,6 +653,7 @@ $(CONSTTIMETEST)$(EXE_EXT): $(CONSTTIMETEST).o
 dummytest$(EXE_EXT): dummytest.o $(DLIBCRYPTO)
 	@target=dummytest; $(BUILD_CMD)
 
+-include $(SRC:.c=.d)
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 
 bftest.o: ../e_os.h ../include/openssl/blowfish.h ../include/openssl/e_os2.h
