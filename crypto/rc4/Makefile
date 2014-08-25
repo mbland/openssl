@@ -95,28 +95,8 @@ depend:
 	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
 
 dclean:
-	$(PERL) -pe 'if (/^# DO NOT DELETE THIS LINE/) {print; exit(0);}' $(MAKEFILE) >Makefile.new
-	mv -f Makefile.new $(MAKEFILE)
 
 clean:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)
-# DO NOT DELETE THIS LINE -- make depend depends on it.
-
-rc4_enc.o: ../../e_os.h ../../include/openssl/bio.h
-rc4_enc.o: ../../include/openssl/buffer.h ../../include/openssl/crypto.h
-rc4_enc.o: ../../include/openssl/e_os2.h ../../include/openssl/err.h
-rc4_enc.o: ../../include/openssl/lhash.h ../../include/openssl/opensslconf.h
-rc4_enc.o: ../../include/openssl/opensslv.h ../../include/openssl/ossl_typ.h
-rc4_enc.o: ../../include/openssl/rc4.h ../../include/openssl/safestack.h
-rc4_enc.o: ../../include/openssl/stack.h ../../include/openssl/symhacks.h
-rc4_enc.o: ../cryptlib.h rc4_enc.c rc4_locl.h
-rc4_skey.o: ../../e_os.h ../../include/openssl/bio.h
-rc4_skey.o: ../../include/openssl/buffer.h ../../include/openssl/crypto.h
-rc4_skey.o: ../../include/openssl/e_os2.h ../../include/openssl/err.h
-rc4_skey.o: ../../include/openssl/lhash.h ../../include/openssl/opensslconf.h
-rc4_skey.o: ../../include/openssl/opensslv.h ../../include/openssl/ossl_typ.h
-rc4_skey.o: ../../include/openssl/rc4.h ../../include/openssl/safestack.h
-rc4_skey.o: ../../include/openssl/stack.h ../../include/openssl/symhacks.h
-rc4_skey.o: ../cryptlib.h rc4_locl.h rc4_skey.c

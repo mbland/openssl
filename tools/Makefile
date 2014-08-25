@@ -48,12 +48,9 @@ errors:
 depend:
 
 dclean:
-	$(PERL) -pe 'if (/^# DO NOT DELETE THIS LINE/) {print; exit(0);}' $(MAKEFILE) >Makefile.new
-	mv -f Makefile.new $(MAKEFILE)
 	rm -f c_rehash
 
 clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)
-# DO NOT DELETE THIS LINE -- make depend depends on it.

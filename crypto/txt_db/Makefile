@@ -67,20 +67,8 @@ depend:
 	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
 
 dclean:
-	$(PERL) -pe 'if (/^# DO NOT DELETE THIS LINE/) {print; exit(0);}' $(MAKEFILE) >Makefile.new
-	mv -f Makefile.new $(MAKEFILE)
 
 clean:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)
-# DO NOT DELETE THIS LINE -- make depend depends on it.
-
-txt_db.o: ../../e_os.h ../../include/openssl/bio.h
-txt_db.o: ../../include/openssl/buffer.h ../../include/openssl/crypto.h
-txt_db.o: ../../include/openssl/e_os2.h ../../include/openssl/err.h
-txt_db.o: ../../include/openssl/lhash.h ../../include/openssl/opensslconf.h
-txt_db.o: ../../include/openssl/opensslv.h ../../include/openssl/ossl_typ.h
-txt_db.o: ../../include/openssl/safestack.h ../../include/openssl/stack.h
-txt_db.o: ../../include/openssl/symhacks.h ../../include/openssl/txt_db.h
-txt_db.o: ../cryptlib.h txt_db.c

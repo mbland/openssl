@@ -98,18 +98,3 @@ depend:
 		mv Makefile.new Makefile
 
 -include $(SRC:.c=.d)
-# DO NOT DELETE THIS LINE -- make depend depends on it.
-
-rsaref.o: ../../../include/openssl/asn1.h ../../../include/openssl/bio.h
-rsaref.o: ../../../include/openssl/bn.h ../../../include/openssl/crypto.h
-rsaref.o: ../../../include/openssl/dh.h ../../../include/openssl/dsa.h
-rsaref.o: ../../../include/openssl/e_os2.h ../../../include/openssl/engine.h
-rsaref.o: ../../../include/openssl/err.h ../../../include/openssl/lhash.h
-rsaref.o: ../../../include/openssl/opensslconf.h
-rsaref.o: ../../../include/openssl/opensslv.h
-rsaref.o: ../../../include/openssl/ossl_typ.h ../../../include/openssl/rand.h
-rsaref.o: ../../../include/openssl/rsa.h ../../../include/openssl/safestack.h
-rsaref.o: ../../../include/openssl/stack.h ../../../include/openssl/symhacks.h
-rsaref.o: ../../../include/openssl/ui.h rsaref.c rsaref_err.c rsaref_err.h
-rsaref.o: source/des.h source/global.h source/md2.h source/md5.h source/rsa.h
-rsaref.o: source/rsaref.h

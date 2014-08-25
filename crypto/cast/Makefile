@@ -75,27 +75,8 @@ depend:
 	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
 
 dclean:
-	$(PERL) -pe 'if (/^# DO NOT DELETE THIS LINE/) {print; exit(0);}' $(MAKEFILE) >Makefile.new
-	mv -f Makefile.new $(MAKEFILE)
 
 clean:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)
-# DO NOT DELETE THIS LINE -- make depend depends on it.
-
-c_cfb64.o: ../../e_os.h ../../include/openssl/cast.h
-c_cfb64.o: ../../include/openssl/e_os2.h ../../include/openssl/opensslconf.h
-c_cfb64.o: c_cfb64.c cast_lcl.h
-c_ecb.o: ../../e_os.h ../../include/openssl/cast.h
-c_ecb.o: ../../include/openssl/e_os2.h ../../include/openssl/opensslconf.h
-c_ecb.o: ../../include/openssl/opensslv.h c_ecb.c cast_lcl.h
-c_enc.o: ../../e_os.h ../../include/openssl/cast.h
-c_enc.o: ../../include/openssl/e_os2.h ../../include/openssl/opensslconf.h
-c_enc.o: c_enc.c cast_lcl.h
-c_ofb64.o: ../../e_os.h ../../include/openssl/cast.h
-c_ofb64.o: ../../include/openssl/e_os2.h ../../include/openssl/opensslconf.h
-c_ofb64.o: c_ofb64.c cast_lcl.h
-c_skey.o: ../../e_os.h ../../include/openssl/cast.h
-c_skey.o: ../../include/openssl/e_os2.h ../../include/openssl/opensslconf.h
-c_skey.o: c_skey.c cast_lcl.h cast_s.h
