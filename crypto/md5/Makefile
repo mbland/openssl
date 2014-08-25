@@ -5,14 +5,9 @@
 DIR=    md5
 TOP=    ../..
 include $(TOP)/configure.mk
-CC=     cc
 CPP=    $(CC) -E
 INCLUDES=-I.. -I$(TOP) -I../../include
-CFLAG=-g
-MAKEFILE=       Makefile
-AR=             ar r
 
-MD5_ASM_OBJ=
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)

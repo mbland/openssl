@@ -5,14 +5,8 @@
 DIR=	pkcs7
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 INCLUDES= -I.. -I$(TOP) -I../../include
-CFLAG=-g
-MAKEFILE=	Makefile
-AR=		ar r
 
-PEX_LIBS=
-EX_LIBS=
  
 CFLAGS= $(INCLUDES) $(CFLAG)
 

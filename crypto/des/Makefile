@@ -5,14 +5,8 @@
 DIR=	des
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 CPP=	$(CC) -E
 INCLUDES=-I$(TOP) -I../../include
-CFLAG=-g
-MAKEFILE=	Makefile
-AR=		ar r
-RANLIB=		ranlib
-DES_ENC=	des_enc.o fcrypt_b.o
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)

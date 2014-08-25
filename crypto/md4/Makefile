@@ -5,12 +5,8 @@
 DIR=    md4
 TOP=    ../..
 include $(TOP)/configure.mk
-CC=     cc
 CPP=    $(CC) -E
 INCLUDES=
-CFLAG=-g
-MAKEFILE=       Makefile
-AR=             ar r
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

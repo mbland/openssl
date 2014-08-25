@@ -5,14 +5,9 @@
 DIR=	bn
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 CPP=    $(CC) -E
 INCLUDES= -I.. -I$(TOP) -I../../include
-CFLAG=-g
-MAKEFILE=	Makefile
-AR=		ar r
 
-BN_ASM=		bn_asm.o
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)

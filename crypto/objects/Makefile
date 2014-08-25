@@ -5,12 +5,7 @@
 DIR=	objects
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 INCLUDES= -I.. -I$(TOP) -I../../include
-CFLAG=-g
-MAKEFILE=	Makefile
-AR=		ar r
-PERL=		perl
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

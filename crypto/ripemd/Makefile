@@ -5,12 +5,8 @@
 DIR=    ripemd
 TOP=    ../..
 include $(TOP)/configure.mk
-CC=     cc
 CPP=    $(CC) -E
 INCLUDES=
-CFLAG=-g
-MAKEFILE=       Makefile
-AR=             ar r
 
 RIP_ASM_OBJ=
 

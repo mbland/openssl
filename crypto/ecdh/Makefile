@@ -5,11 +5,7 @@
 DIR=	ecdh
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 INCLUDES= -I.. -I$(TOP) -I../../include
-CFLAG=-g -Wall
-MAKEFILE=	Makefile
-AR=		ar r
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

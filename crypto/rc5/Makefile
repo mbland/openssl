@@ -5,14 +5,9 @@
 DIR=	rc5
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 CPP=	$(CC) -E
 INCLUDES=
-CFLAG=-g
-MAKEFILE=	Makefile
-AR=		ar r
 
-RC5_ENC=		rc5_enc.o
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)

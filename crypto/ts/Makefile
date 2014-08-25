@@ -5,19 +5,8 @@
 DIR=	ts
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 INCLUDES= -I.. -I../../include
-CFLAG = -g
-INSTALL_PREFIX=
-OPENSSLDIR=     /usr/local/ssl
-INSTALLTOP=/usr/local/ssl
-MAKEDEPPROG=	makedepend
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
-MAKEFILE=	Makefile
-AR=		ar r
 
-PEX_LIBS=
-EX_LIBS=
  
 CFLAGS= $(INCLUDES) $(CFLAG)
 

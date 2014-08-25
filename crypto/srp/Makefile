@@ -1,16 +1,7 @@
 DIR=	srp
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 INCLUDES= -I.. -I$(TOP) -I../../include
-CFLAG=-g
-INSTALL_PREFIX=
-OPENSSLDIR=     /usr/local/ssl
-INSTALLTOP=/usr/local/ssl
-MAKEDEPPROG=	makedepend
-MAKEDEPEND=	$(TOP)/util/domd $(TOP) -MD $(MAKEDEPPROG)
-MAKEFILE=	Makefile.ssl
-AR=		ar r
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 

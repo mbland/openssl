@@ -5,13 +5,9 @@
 DIR=	rc4
 TOP=	../..
 include $(TOP)/configure.mk
-CC=	cc
 CPP=    $(CC) -E
 INCLUDES=
-CFLAG=-g
-AR=		ar r
 
-RC4_ENC=rc4_enc.o rc4_skey.o
 
 CFLAGS= $(INCLUDES) $(CFLAG)
 ASFLAGS= $(INCLUDES) $(ASFLAG)
