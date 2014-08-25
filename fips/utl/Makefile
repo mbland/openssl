@@ -61,9 +61,6 @@ tags:
 
 tests:
 
-depend:
-	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(SRC) $(TEST)
-
 dclean:
 
 clean:

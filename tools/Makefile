@@ -45,8 +45,6 @@ tags:
 
 errors:
 
-depend:
-
 dclean:
 	rm -f c_rehash
 

@@ -90,13 +90,6 @@ tests:
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	@if [ -z "$(THIS)" ]; then \
-	    $(MAKE) -f $(TOP)/Makefile reflect THIS=$@; \
-	else \
-	    $(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC); \
-	fi
-
 dclean:
 
 clean:

@@ -128,13 +128,6 @@ links:
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	@if [ -z "$(THIS)" ]; then \
-	    $(MAKE) -f $(TOP)/Makefile reflect THIS=$@; \
-	else \
-	    $(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(SRC); \
-	fi
-
 dclean:
 	rm -f CA.pl
 

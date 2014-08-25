@@ -61,9 +61,6 @@ tests:
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
-
 dclean:
 
 clean:

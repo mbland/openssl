@@ -73,10 +73,6 @@ fips_test:
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) \
-		$(SRC) $(TEST)
-
 dclean:
 
 clean:

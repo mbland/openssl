@@ -74,9 +74,6 @@ tags:
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(LIBSRC)
-
 dclean:
 
 clean:

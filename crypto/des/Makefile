@@ -97,10 +97,6 @@ tests:
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	@[ -n "$(MAKEDEPEND)" ] # should be set by upper Makefile...
-	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
-
 dclean:
 
 clean:

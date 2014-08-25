@@ -156,13 +156,6 @@ lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 	@target=lint; $(RECURSIVE_MAKE)
 
-depend:
-	@if [ -z "$(THIS)" ]; then \
-	    $(MAKE) -f $(TOP)/Makefile reflect THIS=$@; \
-	fi
-	@[ -z "$(THIS)" ] || $(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
-	@[ -z "$(THIS)" ] || (set -e; target=depend; $(RECURSIVE_MAKE) )
-
 dclean:
 	@target=dclean; $(RECURSIVE_MAKE)
 

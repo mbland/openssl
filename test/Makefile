@@ -399,13 +399,6 @@ test_constant_time: $(CONSTTIMETEST)$(EXE_EXT)
 lint:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-depend:
-	@if [ -z "$(THIS)" ]; then \
-	    $(MAKE) -f $(TOP)/Makefile reflect THIS=$@; \
-	else \
-	    $(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(SRC); \
-	fi
-
 dclean:
 	rm -f $(SRC) $(SHA256TEST).c $(SHA512TEST).c evptests.txt newkey.pem testkey.pem \
 			testreq.pem

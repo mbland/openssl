@@ -34,10 +34,6 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-depend:
-	@[ -n "$(MAKEDEPEND)" ] # should be set by upper Makefile...
-	$(MAKEDEPEND) -- $(CFLAG) $(INCLUDES) $(DEPFLAG) -- $(PROGS) $(LIBSRC)
-
 dclean:
 
 clean:
