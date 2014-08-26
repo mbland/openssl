@@ -2,57 +2,57 @@
 # OpenSSL/crypto/comp/Makefile
 #
 
-DIR=	comp
-TOP=	../..
-include $(TOP)/configure.mk
-INCLUDES= -I.. -I$(TOP) -I../../include
+DIR_crypto_comp=	comp
+TOP_crypto_comp=	../..
+include $(TOP_crypto_comp)/configure.mk
+INCLUDES_crypto_comp= -I.. -I$(TOP_crypto_comp) -I../../include
 
-CFLAGS= $(INCLUDES) $(CFLAG)
+CFLAGS_crypto_comp= $(INCLUDES_crypto_comp) $(CFLAG)
 
-GENERAL=Makefile
-TEST=
-APPS=
+GENERAL_crypto_comp=Makefile
+TEST_crypto_comp=
+APPS_crypto_comp=
 
-LIB=$(TOP)/libcrypto.a
-LIBSRC= comp_lib.c comp_err.c \
+LIB_crypto_comp=$(TOP_crypto_comp)/libcrypto.a
+LIBSRC_crypto_comp= comp_lib.c comp_err.c \
 	c_rle.c c_zlib.c
 
-LIBOBJ=	comp_lib.o comp_err.o \
+LIBOBJ_crypto_comp=	comp_lib.o comp_err.o \
 	c_rle.o c_zlib.o
 
-SRC= $(LIBSRC)
+SRC_crypto_comp= $(LIBSRC_crypto_comp)
 
-EXHEADER= comp.h
-HEADER=	$(EXHEADER)
+EXHEADER_crypto_comp= comp.h
+HEADER_crypto_comp=	$(EXHEADER_crypto_comp)
 
-ALL=    $(GENERAL) $(SRC) $(HEADER)
+ALL_crypto_comp=    $(GENERAL_crypto_comp) $(SRC_crypto_comp) $(HEADER_crypto_comp)
 
 top: top_crypto_comp
 top_crypto_comp:
-	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
+	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR_crypto_comp) sub_all)
 
 all: all_crypto_comp
 all_crypto_comp:	lib
 
-lib:	$(LIBOBJ)
-	$(ARX) $(LIB) $(LIBOBJ)
-	$(RANLIB) $(LIB) || echo Never mind.
+lib:	$(LIBOBJ_crypto_comp)
+	$(ARX) $(LIB_crypto_comp) $(LIBOBJ_crypto_comp)
+	$(RANLIB) $(LIB_crypto_comp) || echo Never mind.
 	@touch lib
 
 files: files_crypto_comp
 files_crypto_comp:
-	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
+	$(PERL) $(TOP_crypto_comp)/util/files.pl TOP=$(TOP_crypto_comp) Makefile >> $(TOP_crypto_comp)/MINFO
 
 links: links_crypto_comp
 links_crypto_comp:
-	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
-	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
-	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
+	@$(PERL) $(TOP_crypto_comp)/util/mklink.pl ../../include/openssl $(EXHEADER_crypto_comp)
+	@$(PERL) $(TOP_crypto_comp)/util/mklink.pl ../../test $(TEST_crypto_comp)
+	@$(PERL) $(TOP_crypto_comp)/util/mklink.pl ../../apps $(APPS_crypto_comp)
 
 install: install_crypto_comp
 install_crypto_comp:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
-	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
+	@headerlist="$(EXHEADER_crypto_comp)"; for i in $$headerlist ; \
 	do  \
 	(cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
@@ -60,14 +60,14 @@ install_crypto_comp:
 
 tags: tags_crypto_comp
 tags_crypto_comp:
-	ctags $(SRC)
+	ctags $(SRC_crypto_comp)
 
 tests: tests_crypto_comp
 tests_crypto_comp:
 
 lint: lint_crypto_comp
 lint_crypto_comp:
-	lint -DLINT $(INCLUDES) $(SRC)>fluff
+	lint -DLINT $(INCLUDES_crypto_comp) $(SRC_crypto_comp)>fluff
 
 dclean: dclean_crypto_comp
 dclean_crypto_comp:
@@ -76,4 +76,7 @@ clean: clean_crypto_comp
 clean_crypto_comp:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
--include $(SRC:.c=.d)
+-include $(SRC_crypto_comp:.c=.d)
+
+.c.o:
+	$(CC) $(CFLAGS_crypto_comp) $(CPPFLAGS) -c -o $@ $<

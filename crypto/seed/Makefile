@@ -2,55 +2,55 @@
 # crypto/seed/Makefile
 #
 
-DIR=	seed
-TOP=	../..
-include $(TOP)/configure.mk
-CPP=	$(CC) -E
-INCLUDES=
+DIR_crypto_seed=	seed
+TOP_crypto_seed=	../..
+include $(TOP_crypto_seed)/configure.mk
+CPP_crypto_seed=	$(CC) -E
+INCLUDES_crypto_seed=
 
-CFLAGS= $(INCLUDES) $(CFLAG)
+CFLAGS_crypto_seed= $(INCLUDES_crypto_seed) $(CFLAG)
 
-GENERAL=Makefile
-TEST=
-APPS=
+GENERAL_crypto_seed=Makefile
+TEST_crypto_seed=
+APPS_crypto_seed=
 
-LIB=$(TOP)/libcrypto.a
-LIBSRC=seed.c seed_ecb.c seed_cbc.c seed_cfb.c seed_ofb.c
-LIBOBJ=seed.o seed_ecb.o seed_cbc.o seed_cfb.o seed_ofb.o
+LIB_crypto_seed=$(TOP_crypto_seed)/libcrypto.a
+LIBSRC_crypto_seed=seed.c seed_ecb.c seed_cbc.c seed_cfb.c seed_ofb.c
+LIBOBJ_crypto_seed=seed.o seed_ecb.o seed_cbc.o seed_cfb.o seed_ofb.o
 
-SRC= $(LIBSRC)
+SRC_crypto_seed= $(LIBSRC_crypto_seed)
 
-EXHEADER= seed.h
-HEADER= seed_locl.h $(EXHEADER)
+EXHEADER_crypto_seed= seed.h
+HEADER_crypto_seed= seed_locl.h $(EXHEADER_crypto_seed)
 
-ALL=    $(GENERAL) $(SRC) $(HEADER)
+ALL_crypto_seed=    $(GENERAL_crypto_seed) $(SRC_crypto_seed) $(HEADER_crypto_seed)
 
 top: top_crypto_seed
 top_crypto_seed:
-	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
+	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR_crypto_seed) sub_all)
 
 all: all_crypto_seed
 all_crypto_seed:	lib
 
-lib:	$(LIBOBJ)
-	$(ARX) $(LIB) $(LIBOBJ)
-	$(RANLIB) $(LIB) || echo Never mind.
+lib:	$(LIBOBJ_crypto_seed)
+	$(ARX) $(LIB_crypto_seed) $(LIBOBJ_crypto_seed)
+	$(RANLIB) $(LIB_crypto_seed) || echo Never mind.
 	@touch lib
 
 files: files_crypto_seed
 files_crypto_seed:
-	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
+	$(PERL) $(TOP_crypto_seed)/util/files.pl TOP=$(TOP_crypto_seed) Makefile >> $(TOP_crypto_seed)/MINFO
 
 links: links_crypto_seed
 links_crypto_seed:
-	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
-	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
-	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
+	@$(PERL) $(TOP_crypto_seed)/util/mklink.pl ../../include/openssl $(EXHEADER_crypto_seed)
+	@$(PERL) $(TOP_crypto_seed)/util/mklink.pl ../../test $(TEST_crypto_seed)
+	@$(PERL) $(TOP_crypto_seed)/util/mklink.pl ../../apps $(APPS_crypto_seed)
 
 install: install_crypto_seed
 install_crypto_seed:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
-	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
+	@headerlist="$(EXHEADER_crypto_seed)"; for i in $$headerlist ; \
 	do  \
 	(cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
@@ -58,14 +58,14 @@ install_crypto_seed:
 
 tags: tags_crypto_seed
 tags_crypto_seed:
-	ctags $(SRC)
+	ctags $(SRC_crypto_seed)
 
 tests: tests_crypto_seed
 tests_crypto_seed:
 
 lint: lint_crypto_seed
 lint_crypto_seed:
-	lint -DLINT $(INCLUDES) $(SRC)>fluff
+	lint -DLINT $(INCLUDES_crypto_seed) $(SRC_crypto_seed)>fluff
 
 dclean: dclean_crypto_seed
 dclean_crypto_seed:
@@ -74,4 +74,9 @@ clean: clean_crypto_seed
 clean_crypto_seed:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
--include $(SRC:.c=.d)
+-include $(SRC_crypto_seed:.c=.d)
+
+.S.s:
+	$(CPP_crypto_seed) $(CPPFLAGS) -o $@ $<
+.c.o:
+	$(CC) $(CFLAGS_crypto_seed) $(CPPFLAGS) -c -o $@ $<

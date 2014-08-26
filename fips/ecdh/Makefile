@@ -2,51 +2,51 @@
 # OpenSSL/fips/ecdh/Makefile
 #
 
-DIR=	ecdh
-TOP=	../..
-include $(TOP)/configure.mk
-INCLUDES=
+DIR_fips_ecdh=	ecdh
+TOP_fips_ecdh=	../..
+include $(TOP_fips_ecdh)/configure.mk
+INCLUDES_fips_ecdh=
 
-CFLAGS= $(INCLUDES) $(CFLAG)
+CFLAGS_fips_ecdh= $(INCLUDES_fips_ecdh) $(CFLAG)
 
-GENERAL=Makefile
-TEST= fips_ecdhvs.c
-APPS=
+GENERAL_fips_ecdh=Makefile
+TEST_fips_ecdh= fips_ecdhvs.c
+APPS_fips_ecdh=
 
-LIB=$(TOP)/libcrypto.a
-LIBSRC= fips_ecdh_selftest.c
-LIBOBJ= fips_ecdh_selftest.o
+LIB_fips_ecdh=$(TOP_fips_ecdh)/libcrypto.a
+LIBSRC_fips_ecdh= fips_ecdh_selftest.c
+LIBOBJ_fips_ecdh= fips_ecdh_selftest.o
 
-SRC= $(LIBSRC)
+SRC_fips_ecdh= $(LIBSRC_fips_ecdh)
 
-EXHEADER=
-HEADER=	$(EXHEADER)
+EXHEADER_fips_ecdh=
+HEADER_fips_ecdh=	$(EXHEADER_fips_ecdh)
 
-ALL=    $(GENERAL) $(SRC) $(HEADER)
+ALL_fips_ecdh=    $(GENERAL_fips_ecdh) $(SRC_fips_ecdh) $(HEADER_fips_ecdh)
 
 top: top_fips_ecdh
 top_fips_ecdh:
-	(cd $(TOP); $(MAKE) DIRS=fips FDIRS=$(DIR) sub_all)
+	(cd $(TOP_fips_ecdh); $(MAKE) DIRS=fips FDIRS=$(DIR_fips_ecdh) sub_all)
 
 all: all_fips_ecdh
 all_fips_ecdh:	lib
 
-lib:	$(LIBOBJ)
-	@echo $(LIBOBJ) > lib
+lib:	$(LIBOBJ_fips_ecdh)
+	@echo $(LIBOBJ_fips_ecdh) > lib
 
 files: files_fips_ecdh
 files_fips_ecdh:
-	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
+	$(PERL) $(TOP_fips_ecdh)/util/files.pl TOP=$(TOP_fips_ecdh) Makefile >> $(TOP_fips_ecdh)/MINFO
 
 links: links_fips_ecdh
 links_fips_ecdh:
-	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/include/openssl $(EXHEADER)
-	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/test $(TEST)
-	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/apps $(APPS)
+	@$(PERL) $(TOP_fips_ecdh)/util/mklink.pl $(TOP_fips_ecdh)/include/openssl $(EXHEADER_fips_ecdh)
+	@$(PERL) $(TOP_fips_ecdh)/util/mklink.pl $(TOP_fips_ecdh)/test $(TEST_fips_ecdh)
+	@$(PERL) $(TOP_fips_ecdh)/util/mklink.pl $(TOP_fips_ecdh)/apps $(APPS_fips_ecdh)
 
 install: install_fips_ecdh
 install_fips_ecdh:
-	@headerlist="$(EXHEADER)"; for i in $$headerlist; \
+	@headerlist="$(EXHEADER_fips_ecdh)"; for i in $$headerlist; \
 	do  \
 	  (cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	  chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
@@ -54,7 +54,7 @@ install_fips_ecdh:
 
 tags: tags_fips_ecdh
 tags_fips_ecdh:
-	ctags $(SRC)
+	ctags $(SRC_fips_ecdh)
 
 tests: tests_fips_ecdh
 tests_fips_ecdh:
@@ -64,7 +64,7 @@ fips_test_fips_ecdh:
 
 lint: lint_fips_ecdh
 lint_fips_ecdh:
-	lint -DLINT $(INCLUDES) $(SRC)>fluff
+	lint -DLINT $(INCLUDES_fips_ecdh) $(SRC_fips_ecdh)>fluff
 
 dclean: dclean_fips_ecdh
 dclean_fips_ecdh:
@@ -72,4 +72,7 @@ dclean_fips_ecdh:
 clean: clean_fips_ecdh
 clean_fips_ecdh:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
--include $(SRC:.c=.d)
+-include $(SRC_fips_ecdh:.c=.d)
+
+.c.o:
+	$(CC) $(CFLAGS_fips_ecdh) $(CPPFLAGS) -c -o $@ $<
