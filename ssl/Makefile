@@ -46,30 +46,36 @@ HEADER=	$(EXHEADER) ssl_locl.h kssl_lcl.h
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_ssl
+top_ssl:
 	(cd ..; $(MAKE) DIRS=$(DIR) all)
 
-all:	shared
+all: all_ssl
+all_ssl:	shared
 
 lib:	$(LIBOBJ)
 	$(AR) $(LIB) $(LIBOBJ)
 	$(RANLIB) $(LIB) || echo Never mind.
 	@touch lib
 
-shared: lib
+shared: shared_ssl
+shared_ssl: lib
 	if [ -n "$(SHARED_LIBS)" ]; then \
 		(cd ..; $(MAKE) $(SHARED_LIB)); \
 	fi
 
-files:
+files: files_ssl
+files_ssl:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_ssl
+links_ssl:
 	@$(PERL) $(TOP)/util/mklink.pl ../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../apps $(APPS)
 
-install:
+install: install_ssl
+install_ssl:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -77,17 +83,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_ssl
+tags_ssl:
 	ctags $(SRC)
 
-tests:
+tests: tests_ssl
+tests_ssl:
 
-lint:
+lint: lint_ssl
+lint_ssl:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_ssl
+dclean_ssl:
 
-clean:
+clean: clean_ssl
+clean_ssl:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

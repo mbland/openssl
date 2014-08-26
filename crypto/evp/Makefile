@@ -48,26 +48,31 @@ HEADER=	evp_locl.h $(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto_evp
+top_crypto_evp:
 	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_crypto_evp
+all_crypto_evp:	lib
 
 lib:	$(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
 	$(RANLIB) $(LIB) || echo Never mind.
 	@touch lib
 
-files:
+files: files_crypto_evp
+files_crypto_evp:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_crypto_evp
+links_crypto_evp:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
 	@[ -f $(TESTDATA) ] && cp $(TESTDATA) ../../test && echo "$(TESTDATA) -> ../../test/$(TESTDATA)"
 	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
 
-install:
+install: install_crypto_evp
+install_crypto_evp:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -75,17 +80,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_crypto_evp
+tags_crypto_evp:
 	ctags $(SRC)
 
-tests:
+tests: tests_crypto_evp
+tests_crypto_evp:
 
-lint:
+lint: lint_crypto_evp
+lint_crypto_evp:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_crypto_evp
+dclean_crypto_evp:
 
-clean:
+clean: clean_crypto_evp
+clean_crypto_evp:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

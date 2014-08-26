@@ -24,41 +24,52 @@ HEADER=	$(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_fips_ecdsa
+top_fips_ecdsa:
 	(cd $(TOP); $(MAKE) DIRS=fips FDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_fips_ecdsa
+all_fips_ecdsa:	lib
 
 lib:	$(LIBOBJ)
 	@echo $(LIBOBJ) > lib
 
-files:
+files: files_fips_ecdsa
+files_fips_ecdsa:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_fips_ecdsa
+links_fips_ecdsa:
 	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/apps $(APPS)
 
-install:
+install: install_fips_ecdsa
+install_fips_ecdsa:
 	@headerlist="$(EXHEADER)"; for i in $$headerlist; \
 	do  \
 	  (cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	  chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done
 
-tags:
+tags: tags_fips_ecdsa
+tags_fips_ecdsa:
 	ctags $(SRC)
 
-tests:
+tests: tests_fips_ecdsa
+tests_fips_ecdsa:
 
-fips_test:
+fips_test: fips_test_fips_ecdsa
+fips_test_fips_ecdsa:
 
-lint:
+lint: lint_fips_ecdsa
+lint_fips_ecdsa:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_fips_ecdsa
+dclean_fips_ecdsa:
 
-clean:
+clean: clean_fips_ecdsa
+clean_fips_ecdsa:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 -include $(SRC:.c=.d)

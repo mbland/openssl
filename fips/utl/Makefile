@@ -24,36 +24,45 @@ HEADER=	$(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_fips_utl
+top_fips_utl:
 	(cd $(TOP); $(MAKE) DIRS=fips FDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_fips_utl
+all_fips_utl:	lib
 
 lib:	$(LIBOBJ)
 	@echo $(LIBOBJ) > lib
 
-files:
+files: files_fips_utl
+files_fips_utl:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_fips_utl
+links_fips_utl:
 	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl $(TOP)/apps $(APPS)
 
-install:
+install: install_fips_utl
+install_fips_utl:
 	@headerlist="$(EXHEADER)"; for i in $$headerlist; \
 	do  \
 	  (cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	  chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done
 
-tags:
+tags: tags_fips_utl
+tags_fips_utl:
 	ctags $(SRC)
 
-tests:
+tests: tests_fips_utl
+tests_fips_utl:
 
-dclean:
+dclean: dclean_fips_utl
+dclean_fips_utl:
 
-clean:
+clean: clean_fips_utl
+clean_fips_utl:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 -include $(SRC:.c=.d)

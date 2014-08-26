@@ -28,10 +28,12 @@ HEADER= wp_locl.h $(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto_whrlpool
+top_crypto_whrlpool:
 	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_crypto_whrlpool
+all_crypto_whrlpool:	lib
 
 lib:	$(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
@@ -46,15 +48,18 @@ wp-x86_64.s: asm/wp-x86_64.pl
 
 $(LIBOBJ): $(LIBSRC)
 
-files:
+files: files_crypto_whrlpool
+files_crypto_whrlpool:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_crypto_whrlpool
+links_crypto_whrlpool:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
 
-install:
+install: install_crypto_whrlpool
+install_crypto_whrlpool:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -62,17 +67,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_crypto_whrlpool
+tags_crypto_whrlpool:
 	ctags $(SRC)
 
-tests:
+tests: tests_crypto_whrlpool
+tests_crypto_whrlpool:
 
-lint:
+lint: lint_crypto_whrlpool
+lint_crypto_whrlpool:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_crypto_whrlpool
+dclean_crypto_whrlpool:
 
-clean:
+clean: clean_crypto_whrlpool
+clean_crypto_whrlpool:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

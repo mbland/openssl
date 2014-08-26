@@ -28,10 +28,12 @@ HEADER=	cast_s.h cast_lcl.h $(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto_cast
+top_crypto_cast:
 	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_crypto_cast
+all_crypto_cast:	lib
 
 lib:	$(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
@@ -41,15 +43,18 @@ lib:	$(LIBOBJ)
 cast-586.s:	asm/cast-586.pl ../perlasm/x86asm.pl ../perlasm/cbc.pl
 	$(PERL)	asm/cast-586.pl $(PERLASM_SCHEME) $(CLAGS) $(PROCESSOR) > $@
 
-files:
+files: files_crypto_cast
+files_crypto_cast:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_crypto_cast
+links_crypto_cast:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
 
-install:
+install: install_crypto_cast
+install_crypto_cast:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -57,17 +62,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_crypto_cast
+tags_crypto_cast:
 	ctags $(SRC)
 
-tests:
+tests: tests_crypto_cast
+tests_crypto_cast:
 
-lint:
+lint: lint_crypto_cast
+lint_crypto_cast:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_crypto_cast
+dclean_crypto_cast:
 
-clean:
+clean: clean_crypto_cast
+clean_crypto_cast:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

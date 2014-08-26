@@ -24,25 +24,30 @@ HEADER=	rc2_locl.h $(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto_rc2
+top_crypto_rc2:
 	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_crypto_rc2
+all_crypto_rc2:	lib
 
 lib:	$(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
 	$(RANLIB) $(LIB) || echo Never mind.
 	@touch lib
 
-files:
+files: files_crypto_rc2
+files_crypto_rc2:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_crypto_rc2
+links_crypto_rc2:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
 
-install:
+install: install_crypto_rc2
+install_crypto_rc2:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -50,17 +55,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_crypto_rc2
+tags_crypto_rc2:
 	ctags $(SRC)
 
-tests:
+tests: tests_crypto_rc2
+tests_crypto_rc2:
 
-lint:
+lint: lint_crypto_rc2
+lint_crypto_rc2:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_crypto_rc2
+dclean_crypto_rc2:
 
-clean:
+clean: clean_crypto_rc2
+clean_crypto_rc2:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

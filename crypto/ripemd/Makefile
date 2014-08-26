@@ -29,10 +29,12 @@ HEADER= rmd_locl.h rmdconst.h $(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto_ripemd
+top_crypto_ripemd:
 	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
 
-all:    lib
+all: all_crypto_ripemd
+all_crypto_ripemd:    lib
 
 lib:    $(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
@@ -42,15 +44,18 @@ lib:    $(LIBOBJ)
 rmd-586.s:	asm/rmd-586.pl ../perlasm/x86asm.pl
 	$(PERL) asm/rmd-586.pl $(PERLASM_SCHEME) $(CFLAGS) > $@
 
-files:
+files: files_crypto_ripemd
+files_crypto_ripemd:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_crypto_ripemd
+links_crypto_ripemd:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
 
-install:
+install: install_crypto_ripemd
+install_crypto_ripemd:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -58,17 +63,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_crypto_ripemd
+tags_crypto_ripemd:
 	ctags $(SRC)
 
-tests:
+tests: tests_crypto_ripemd
+tests_crypto_ripemd:
 
-lint:
+lint: lint_crypto_ripemd
+lint_crypto_ripemd:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_crypto_ripemd
+dclean_crypto_ripemd:
 
-clean:
+clean: clean_crypto_ripemd
+clean_crypto_ripemd:
 	rm -f *.s *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

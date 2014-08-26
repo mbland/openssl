@@ -48,13 +48,15 @@ EXE=fipsld fips_standalone_sha1
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_fips
+top_fips:
 	@(cd ..; $(MAKE) DIRS=$(DIR) all)
 
 testapps:
 	@if [ -z "$(THIS)" ]; then $(MAKE) -f $(TOP)/Makefile reflect THIS=$@; fi
 
-all:
+all: all_fips
+all_fips:
 	@if [ -n "$(FIPSCANISTERONLY)" ]; then \
 		$(MAKE) -e subdirs lib ; \
 	elif [ -z "$(FIPSLIBDIR)" ]; then \
@@ -126,14 +128,17 @@ fips_standalone_sha1$(EXE_EXT):	sha/fips_standalone_sha1.c
 		$(HOSTCC) $(HOSTCFLAGS) -o $ $@ -I../include -I../crypto sha/fips_standalone_sha1.c ../crypto/sha/sha1dgst.c ; \
 	fi
 
-subdirs:
+subdirs: subdirs_fips
+subdirs_fips:
 	@target=all; $(RECURSIVE_MAKE)
 
-files:
+files: files_fips
+files_fips:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 	@target=files; $(RECURSIVE_MAKE)
 
-links:
+links: links_fips
+links_fips:
 	@$(PERL) $(TOP)/util/mklink.pl ../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../test $(TEST)
 	@target=links; $(RECURSIVE_MAKE)
@@ -156,12 +161,15 @@ $(FIPSCANLIB):	$(FIPSCANLOC)
 	$(RANLIB) ../$(FIPSCANLIB).a || echo Never mind.
 	@touch lib
 
-shared:	lib subdirs fips_premain_dso$(EXE_EXT)
+shared: shared_fips
+shared_fips:	lib subdirs_fips fips_premain_dso$(EXE_EXT)
 
-libs:
+libs: libs_fips
+libs_fips:
 	@target=lib; $(RECURSIVE_MAKE)
 
-fips_test: top
+fips_test: fips_test_fips
+fips_test_fips: top
 	@target=fips_test; $(RECURSIVE_MAKE)
 
 fips_test_diff:
@@ -172,7 +180,8 @@ fips_test_diff:
 	fi
 
 
-install:
+install: install_fips
+install_fips:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ;\
 	do \
@@ -192,15 +201,18 @@ install:
 		$(INSTALL_PREFIX)$(INSTALLTOP)/$(LIBDIR)/; \
 	chmod 0444 $(INSTALL_PREFIX)$(INSTALLTOP)/$(LIBDIR)/fips*
 
-lint:
+lint: lint_fips
+lint_fips:
 	@target=lint; $(RECURSIVE_MAKE)
 
-clean:
+clean: clean_fips
+clean_fips:
 	rm -f fipscanister.o.sha1 fips_premain_dso$(EXE_EXT) fips_standalone_sha1$(EXE_EXT) \
 		*.s *.o *.d */*.o */*.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 	@target=clean; $(RECURSIVE_MAKE)
 
-dclean:
+dclean: dclean_fips
+dclean_fips:
 	@target=dclean; $(RECURSIVE_MAKE)
 
 -include $(SRC:.c=.d)

@@ -24,25 +24,30 @@ HEADER=	$(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto_hmac
+top_crypto_hmac:
 	(cd ../..; $(MAKE) DIRS=crypto SDIRS=$(DIR) sub_all)
 
-all:	lib
+all: all_crypto_hmac
+all_crypto_hmac:	lib
 
 lib:	$(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
 	$(RANLIB) $(LIB) || echo Never mind.
 	@touch lib
 
-files:
+files: files_crypto_hmac
+files_crypto_hmac:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) Makefile >> $(TOP)/MINFO
 
-links:
+links: links_crypto_hmac
+links_crypto_hmac:
 	@$(PERL) $(TOP)/util/mklink.pl ../../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../../apps $(APPS)
 
-install:
+install: install_crypto_hmac
+install_crypto_hmac:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ; \
 	do  \
@@ -50,17 +55,22 @@ install:
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
 
-tags:
+tags: tags_crypto_hmac
+tags_crypto_hmac:
 	ctags $(SRC)
 
-tests:
+tests: tests_crypto_hmac
+tests_crypto_hmac:
 
-lint:
+lint: lint_crypto_hmac
+lint_crypto_hmac:
 	lint -DLINT $(INCLUDES) $(SRC)>fluff
 
-dclean:
+dclean: dclean_crypto_hmac
+dclean_crypto_hmac:
 
-clean:
+clean: clean_crypto_hmac
+clean_crypto_hmac:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 
 -include $(SRC:.c=.d)

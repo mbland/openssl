@@ -42,10 +42,12 @@ HEADER=	cryptlib.h buildinf.h md32_common.h o_str.h o_dir.h $(EXHEADER)
 
 ALL=    $(GENERAL) $(SRC) $(HEADER)
 
-top:
+top: top_crypto
+top_crypto:
 	@(cd ..; $(MAKE) DIRS=$(DIR) all)
 
-all: shared
+all: all_crypto
+all_crypto: shared
 
 fips: cryptlib.o thr_id.o uid.o $(CPUID_OBJ)
 	[ -n "$(SDIRS)" ] && for i in $(SDIRS) ; do \
@@ -83,14 +85,17 @@ alphacpuid.s:	alphacpuid.pl
 	$(PERL) alphacpuid.pl > $$preproc && \
 	$(CC) -E $$preproc > $@ && rm $$preproc)
 
-subdirs:
+subdirs: subdirs_crypto
+subdirs_crypto:
 	@target=all; $(RECURSIVE_MAKE)
 
-files:
+files: files_crypto
+files_crypto:
 	$(PERL) $(TOP)/util/files.pl TOP=$(TOP) "CPUID_OBJ=$(CPUID_OBJ)" Makefile >> $(TOP)/MINFO
 	@target=files; $(RECURSIVE_MAKE)
 
-links:
+links: links_crypto
+links_crypto:
 	@$(PERL) $(TOP)/util/mklink.pl ../include/openssl $(EXHEADER)
 	@$(PERL) $(TOP)/util/mklink.pl ../test $(TEST)
 	@$(PERL) $(TOP)/util/mklink.pl ../apps $(APPS)
@@ -103,15 +108,18 @@ $(LIB):	$(LIBOBJ)
 	$(ARX) $(LIB) $(LIBOBJ)
 	$(RANLIB) $(LIB) || echo Never mind.
 
-shared: buildinf.h lib subdirs
+shared: shared_crypto
+shared_crypto: buildinf.h lib subdirs
 	if [ -n "$(SHARED_LIBS)" ]; then \
 		(cd ..; $(MAKE) $(SHARED_LIB)); \
 	fi
 
-libs:
+libs: libs_crypto
+libs_crypto:
 	@target=lib; $(RECURSIVE_MAKE)
 
-install:
+install: install_crypto
+install_crypto:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER)"; for i in $$headerlist ;\
 	do \
@@ -120,14 +128,17 @@ install:
 	done;
 	@target=install; $(RECURSIVE_MAKE)
 
-lint:
+lint: lint_crypto
+lint_crypto:
 	@target=lint; $(RECURSIVE_MAKE)
 
-clean:
+clean: clean_crypto
+clean_crypto:
 	rm -f buildinf.h *.s *.o *.d */*.o */*.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
 	@target=clean; $(RECURSIVE_MAKE)
 
-dclean:
+dclean: dclean_crypto
+dclean_crypto:
 	rm -f opensslconf.h
 	@target=dclean; $(RECURSIVE_MAKE)
 
