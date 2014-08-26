@@ -121,7 +121,11 @@ fips_premain_dso$(EXE_EXT): fips_premain.c
 	$(CC) $(CFLAGS_fips) -DFINGERPRINT_PREMAIN_DSO_LOAD -o $@ fips_premain.c \
 		$(FIPSLIBDIR)fipscanister.o ../libcrypto.a $(EX_LIBS)
 
+ifdef FIPSCANISTERONLY
+else ifndef FIPSLIBDIR
+else
 include fips_standalone_sha1.mk
+endif
 
 subdirs: subdirs_fips
 subdirs_fips:

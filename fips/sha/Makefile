@@ -39,7 +39,12 @@ all_fips_sha:	../fips_standalone_sha1$(EXE_EXT) lib
 lib:	$(LIBOBJ_fips_sha)
 	@echo $(LIBOBJ_fips_sha) > lib
 
+ifdef FIPSCANISTERONLY
 include fips_standalone_sha1.mk
+else ifndef FIPSLIBDIR
+include fips_standalone_sha1.mk
+else
+endif
 
 files: files_fips_sha
 files_fips_sha:
