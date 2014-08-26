@@ -50,11 +50,23 @@ all: all_crypto
 all_crypto: shared
 
 fips: cryptlib.o thr_id.o uid.o $(CPUID_OBJ)
-	[ -n "$(SDIRS)" ] && for i in $(SDIRS) ; do \
-		    ( obj=`$(PERL) $(TOP_crypto)/util/fipsobj.pl $$i` && \
-			cd $$i && echo "making fips in $(DIR_crypto)/$$i..." && \
-		    $(MAKE) -e TOP=../.. DIR=$$i INCLUDES_crypto_$$i='$(INCLUDES_crypto)' $$obj ) || exit 1; \
-		done;
+
+define FIPS_OBJS_RULE_template
+fips_objs_$(1):
+	@cd $(1) && echo making fips in $(DIR_crypto)/$(1)... && \
+	$(MAKE) -e TOP=../.. DIR=$(1) INCLUDES_crypto_$(1)='$(INCLUDES_crypto)' \
+	`FIPS_EX_OBJ="$(FIPS_EX_OBJ)"\
+	AES_ENC="$(AES_ENC)"\
+	BN_ASM="$(BN_ASM)"\
+	DES_ENC="$(DES_ENC)"\
+	SHA1_ASM_OBJ="$(SHA1_ASM_OBJ)"\
+	MODES_ASM_OBJ="$(MODES_ASM_OBJ)"\
+	$(PERL) $(TOP_crypto)/../util/fipsobj.pl $(1)`
+
+fips: fips_objs_$(1)
+endef
+
+$(foreach dir,$(SDIRS),$(eval $(call FIPS_OBJS_RULE_template,$(dir))))
 
 buildinf.h: ../Makefile
 	( echo "#ifndef MK1MF_BUILD"; \
