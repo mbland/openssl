@@ -10,12 +10,6 @@ INCLUDE_crypto=	-I. -I$(TOP_crypto) -I../include $(ZLIB_INCLUDE)
 INCLUDES_crypto=	-I.. -I../.. -I../modes -I../asn1 -I../evp -I../../include $(ZLIB_INCLUDE)
 RM_crypto=             rm -f
 
-RECURSIVE_MAKE_crypto=	[ -n "$(SDIRS)" ] && for i in $(SDIRS) ; do \
-		    (cd $$i && echo "making $$target in $(DIR_crypto)/$$i..." && \
-		    $(MAKE) -e TOP=../.. DIR=$$i INCLUDES_crypto_$$i='$(INCLUDES_crypto)' $$target ) || exit 1; \
-		done;
-
- 
 CFLAGS_crypto= $(INCLUDE_crypto) $(CFLAG)
 ASFLAGS_crypto= $(INCLUDE_crypto) $(ASFLAG)
 AFLAGS_crypto=$(ASFLAGS_crypto)
@@ -97,20 +91,14 @@ alphacpuid.s:	alphacpuid.pl
 	$(PERL) alphacpuid.pl > $$preproc && \
 	$(CC) -E $$preproc > $@ && rm $$preproc)
 
-subdirs: subdirs_crypto
-subdirs_crypto:
-	@target=all; $(RECURSIVE_MAKE_crypto)
-
 files: files_crypto
 files_crypto:
 	$(PERL) $(TOP_crypto)/util/files.pl TOP=$(TOP_crypto) "CPUID_OBJ=$(CPUID_OBJ)" Makefile >> $(TOP_crypto)/MINFO
-	@target=files; $(RECURSIVE_MAKE_crypto)
 
 links: links_crypto
 links_crypto:
 	@$(PERL) $(TOP_crypto)/util/mklink.pl ../include/openssl $(EXHEADER_crypto)
 	@$(PERL) $(TOP_crypto)/util/mklink.pl ../test $(TEST_crypto)
-	@target=links; $(RECURSIVE_MAKE_crypto)
 
 # lib: $(LIB_crypto): are splitted to avoid end-less loop
 lib:	$(LIB_crypto)
@@ -125,10 +113,6 @@ shared_crypto: buildinf.h lib subdirs
 		(cd ..; $(MAKE) $(SHARED_LIB_crypto)); \
 	fi
 
-libs: libs_crypto
-libs_crypto:
-	@target=lib; $(RECURSIVE_MAKE_crypto)
-
 install: install_crypto
 install_crypto:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
@@ -137,21 +121,41 @@ install_crypto:
 	(cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
-	@target=install; $(RECURSIVE_MAKE_crypto)
-
-lint: lint_crypto
-lint_crypto:
-	@target=lint; $(RECURSIVE_MAKE_crypto)
 
 clean: clean_crypto
 clean_crypto:
 	rm -f buildinf.h *.s *.o *.d */*.o */*.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
-	@target=clean; $(RECURSIVE_MAKE_crypto)
 
 dclean: dclean_crypto
 dclean_crypto:
 	rm -f opensslconf.h
-	@target=dclean; $(RECURSIVE_MAKE_crypto)
+
+# $(1) is the subdir, $(2) is the target, $(3) is the subdir target.
+define CRYPTO_SUBDIR_RULE_template
+$(2)_crypto_$(1):
+	@cd $(1) && echo "making $(3) in crypto/$(1)..." && \
+	$(MAKE) -e TOP=../.. DIR=$(1) INCLUDES_crypto_$(1)='$(INCLUDES_crypto)' \
+	$(3)
+
+$(2): $(2)_crypto_$(1)
+endef
+
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),subdirs,all)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),files,files)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),links,links)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),libs,lib)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),install,install)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),lint,lint)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),clean,clean)))
+$(foreach dir, $(SDIRS), \
+  $(eval $(call CRYPTO_SUBDIR_RULE_template,$(dir),dclean,dclean)))
 
 -include $(SRC_crypto:.c=.d)
 
