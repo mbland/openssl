@@ -7,13 +7,6 @@ TOP_engines=	..
 include $(TOP_engines)/configure.mk
 INCLUDES_engines= -I../include
 
-RECURSIVE_MAKE_engines=	[ -z "$(ENGDIRS)" ] || for i in $(ENGDIRS) ; do \
-		    (cd $$i && echo "making $$target in $(DIR_engines)/$$i..." && \
-		    $(MAKE) -e TOP=../.. DIR=$$i $$target ) || exit 1; \
-		done;
-
-
-
 CFLAGS_engines= $(INCLUDES_engines) $(CFLAG)
 ASFLAGS_engines= $(INCLUDES_engines) $(ASFLAG)
 
@@ -94,16 +87,10 @@ e_padlock-x86_64.s:	asm/e_padlock-x86_64.pl
 subdirs: subdirs_engines
 subdirs_engines:
 	echo $(ENGDIRS)
-	@target=all; $(RECURSIVE_MAKE_engines)
 
 files: files_engines
 files_engines:
 	$(PERL) $(TOP_engines)/util/files.pl TOP=$(TOP_engines) Makefile >> $(TOP_engines)/MINFO
-	@target=files; $(RECURSIVE_MAKE_engines)
-
-links: links_engines
-links_engines:
-	@target=links; $(RECURSIVE_MAKE_engines)
 
 # XXXXX This currently only works on systems that use .so as suffix
 # for shared libraries as well as for Cygwin which uses the
@@ -136,7 +123,6 @@ install_engines:
 			  mv -f $(INSTALL_PREFIX)$(INSTALLTOP)/$(LIBDIR)/engines/$$pfx$$l$$sfx.new $(INSTALL_PREFIX)$(INSTALLTOP)/$(LIBDIR)/engines/$$pfx$$l$$sfx ); \
 		done; \
 	fi
-	@target=install; $(RECURSIVE_MAKE_engines)
 
 tags: tags_engines
 tags_engines:
@@ -156,16 +142,34 @@ tests_engines:
 lint: lint_engines
 lint_engines:
 	lint -DLINT $(INCLUDES_engines) $(SRC_engines)>fluff
-	@target=lint; $(RECURSIVE_MAKE_engines)
-
-dclean: dclean_engines
-dclean_engines:
-	@target=dclean; $(RECURSIVE_MAKE_engines)
 
 clean: clean_engines
 clean_engines:
 	rm -f *.o *.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
-	@target=clean; $(RECURSIVE_MAKE_engines)
+
+# $(1) is the subdir, $(2) is the target, $(3) is the subdir target.
+define ENGINES_SUBDIR_RULE_template
+$(2)_engines_$(1):
+	@cd $(1) && echo "making $(3) in engines/$(1)..." && \
+	$(MAKE) -e TOP=../.. DIR=$(1) $(3)
+
+$(2): $(2)_engines_$(1)
+endef
+
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),subdirs,all)))
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),files,files)))
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),links,links)))
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),install,install)))
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),lint,lint)))
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),clean,clean)))
+$(foreach dir, $(ENGDIRS), \
+  $(eval $(call ENGINES_SUBDIR_RULE_template,$(dir),dclean,dclean)))
 
 -include $(SRC_engines:.c=.d)
 
