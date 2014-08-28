@@ -16,12 +16,6 @@ FIPS_TVOK=	$$HOME/fips/tv.ok
 
 FIPSCANLOC=	$(FIPSLIBDIR)fipscanister.o
 
-RECURSIVE_MAKE_fips=	[ -n "$(FDIRS)" ] && for i in $(FDIRS) ; do \
-		    (cd $$i && echo "making $$target in $(DIR_fips)/$$i..." && \
-		    $(MAKE) -e TOP=../.. DIR=$$i INCLUDES_fips_$$i='${INCLUDES_fips}' $$target ) || exit 1; \
-		done;
-
- 
 CFLAGS_fips= $(INCLUDE_fips) $(CFLAG) -DHMAC_EXT=\"$${HMAC_EXT:-sha1}\"
 ASFLAGS_fips= $(INCLUDE_fips) $(ASFLAG)
 AFLAGS_fips=$(ASFLAGS_fips)
@@ -122,20 +116,14 @@ all_fips: lib fips_premain_dso$(EXE_EXT) fips_standalone_sha1$(EXE_EXT)
 include fips_standalone_sha1.mk
 endif
 
-subdirs: subdirs_fips
-subdirs_fips:
-	@target=all; $(RECURSIVE_MAKE_fips)
-
 files: files_fips
 files_fips:
 	$(PERL) $(TOP_fips)/util/files.pl TOP=$(TOP_fips) Makefile >> $(TOP_fips)/MINFO
-	@target=files; $(RECURSIVE_MAKE_fips)
 
 links: links_fips
 links_fips:
 	@$(PERL) $(TOP_fips)/util/mklink.pl ../include/openssl $(EXHEADER_fips)
 	@$(PERL) $(TOP_fips)/util/mklink.pl ../test $(TEST_fips)
-	@target=links; $(RECURSIVE_MAKE_fips)
 
 # lib: and $(LIB_fips): are splitted to avoid end-less loop
 lib:	$(LIB_fips)
@@ -158,13 +146,8 @@ $(FIPSCANLIB):	$(FIPSCANLOC)
 shared: shared_fips
 shared_fips:	lib subdirs_fips fips_premain_dso$(EXE_EXT)
 
-libs: libs_fips
-libs_fips:
-	@target=lib; $(RECURSIVE_MAKE_fips)
-
 fips_test: fips_test_fips
-fips_test_fips: top
-	@target=fips_test; $(RECURSIVE_MAKE_fips)
+fips_test_fips: all_fips
 
 fips_test_diff:
 	@if diff -b -B -I '^\#' -cr -X fips-nodiff.txt $(FIPS_TVDIR) $(FIPS_TVOK) ; then \
@@ -175,14 +158,15 @@ fips_test_diff:
 
 
 install: install_fips
-install_fips:
+install_fips_before_subdirs:
 	@[ -n "$(INSTALLTOP)" ] # should be set by top Makefile...
 	@headerlist="$(EXHEADER_fips)"; for i in $$headerlist ;\
 	do \
 	(cp $$i $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i; \
 	chmod 644 $(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl/$$i ); \
 	done;
-	@target=install; $(RECURSIVE_MAKE_fips)
+
+install_fips: install_fips_subdirs
 	for i in $(EXE_fips) ; \
 	do \
 		echo "installing $$i"; \
@@ -195,19 +179,43 @@ install_fips:
 		$(INSTALL_PREFIX)$(INSTALLTOP)/$(LIBDIR)/; \
 	chmod 0444 $(INSTALL_PREFIX)$(INSTALLTOP)/$(LIBDIR)/fips*
 
-lint: lint_fips
-lint_fips:
-	@target=lint; $(RECURSIVE_MAKE_fips)
-
 clean: clean_fips
 clean_fips:
 	rm -f fipscanister.o.sha1 fips_premain_dso$(EXE_EXT) fips_standalone_sha1$(EXE_EXT) \
 		*.s *.o *.d */*.o */*.d *.obj lib tags core .pure .nfs* *.old *.bak fluff
-	@target=clean; $(RECURSIVE_MAKE_fips)
 
-dclean: dclean_fips
-dclean_fips:
-	@target=dclean; $(RECURSIVE_MAKE_fips)
+# $(1) is the subdir, $(2) is the target, $(3) is the subdir target.
+define FIPS_SUBDIR_RULE_template
+$(2)_fips_$(1):
+       @cd $(1) && echo "making $(3) in fips/$(1)..." && \
+       $(MAKE) -e TOP=../.. DIR=$(1) INCLUDES_fips_$(1)='$(INCLUDES_fips)' \
+       $(3)
+
+$(2): $(2)_fips_$(1)
+endef
+
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),subdirs,all)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),files,files)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),links,links)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),libs,lib)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),fips_test,fips_test)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),install,install)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),lint,lint)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),clean,clean)))
+$(foreach dir, $(FDIRS), \
+  $(eval $(call FIPS_SUBDIR_RULE_template,$(dir),dclean,dclean)))
+
+INSTALL_FIPS_SUBDIRS_TARGETS= $(foreach dir, $(FDIRS), install_fips_$(dir))
+$(INSTALL_FIPS_SUBDIRS_TARGETS): install_fips_before_subdirs
+install_fips_subdirs: $(INSTALL_FIPS_SUBDIRS_TARGETS) 
 
 -include $(SRC_fips:.c=.d)
 
